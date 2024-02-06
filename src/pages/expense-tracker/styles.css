@@ -24,12 +24,12 @@
   border-radius: 50%;
 }
 
-.sign-out-button {
+.sign-out-btn {
   border: none;
   margin-top: 50px;
   width: 150px;
   background: #3498db;
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #f73333, #e76d6d);
   border-radius: 10px;
   color: #ffffff;
   font-size: 22px;
@@ -38,10 +38,10 @@
   text-decoration: none;
 }
 
-.sign-out-button:hover {
+.sign-out-btn:hover {
   background: #3cb0fd;
 
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #880303, #f81e1e);
   text-decoration: none;
   cursor: pointer;
 }
