@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Switch from "react-switch";
 import { useAddTransaction } from "../../hooks/useAddTransaction";
 import { useGetTransactions } from "../../hooks/useGetTransactions";
 import { useGetUserInfo } from "../../hooks/useGetUserInfo";
@@ -14,9 +15,9 @@ export const ExpenseTracker = () => {
     const navigate = useNavigate();
     const [theme, setTheme] = useState("light");
 
-    const toggleTheme = () => {
-        setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"))
-        };
+    const handleThemeChange = (checked) => {
+        setTheme(checked ? "dark" : "light");
+    };
 
     const [description, setDescription] = useState("");
     const [transactionAmount, setTransactionAmount] = useState(0);
@@ -49,7 +50,13 @@ export const ExpenseTracker = () => {
         <div className={`expense-tracker-container ${theme}`}>
         <div className="expense-tracker">
             <div className="container">
-                <button className="theme-toggle-btn" onClick={toggleTheme}> Toggle Dark/Light</button>
+                <Switch
+                    checked={theme === "dark"}
+                    onChange={handleThemeChange}
+                    offColor="#F5F5F5"
+                    onColor="#2B2B2B"
+                    className="theme-toggle-slider"
+                    />
                 <h1> {userName}'s Spendy Expense Tracker</h1>
                 <div className="balance">
                     <h3> Your Balance:</h3>
