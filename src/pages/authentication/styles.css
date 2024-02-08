@@ -10,16 +10,14 @@
   color: white;
   text-shadow: -1px 2px 6px rgba(2, 48, 71, 0.54);
   background: rgb(0, 204, 255);
-  background: linear-gradient(
-    90deg,
-    rgb(107, 228, 153) 0%,
-    rgb(79, 201, 238) 100%
-  );
+  background: url('./5.png') no-repeat;
+  background-color: rgb(93, 194, 194);
+  background-position: center;
 }
 /* #219ebc */
 
 .user-login-page p {
-  font-size: 50px;
+  font-size: 100px;
   font-weight: bold;
 }
 

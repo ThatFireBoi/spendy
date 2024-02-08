@@ -41,12 +41,13 @@ export const ExpenseTracker = () => {
 
     return (
         <>
+        <div className="expense-tracker-container">
         <div className="expense-tracker">
             <div className="container">
                 <h1> {userName}'s Spendy Expense Tracker</h1>
                 <div className="balance">
-                    <h3> Your Balance</h3>
-                    {balance >= 0 ? <h2>${balance} <h4>You are doing great! Keep it up!</h4></h2> : <h2> -${balance * -1} <h4>You are spending more than you are saving!</h4></h2>}
+                    <h3> Your Balance:</h3>
+                    {balance >= 0 ? <h2><u>${balance}</u><h4>You are doing great! Keep it up!</h4></h2> : <h2> -${balance * -1} <h4>You are spending more than you are saving!</h4></h2>}
                 </div>
                 <div className="Summary">
                     <div className="Income">
@@ -80,6 +81,7 @@ export const ExpenseTracker = () => {
             
             })}
         </ul>
+        </div>
         </div>
         </>
     );

@@ -1,57 +1,175 @@
+/* styles.css */
 .expense-tracker {
-  width: 100vw;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  color: #023047;
+  background-color: cornflowerblue;
+  color: white;
+  min-height: 100vh;
+  padding: 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.expense-tracker-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(
+    90deg,
+    rgb(240, 243, 241) 0%,
+    rgb(127, 129, 127) 100%
+  );
 }
 
 .expense-tracker h1 {
-  font-size: 40px;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px rgb(8, 6, 6);
 }
-.expense-tracker button {
-  margin-left: 10px;
+
+.balance,
+.Summary {
+  background-color: white;
+  border: 2px;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  color: #2d3436;
 }
+
+.balance h2,
+.balance h3 {
+  display: inline;
+}
+
+.balance h2 {
+  font-size: 2rem;
+  margin-left: 0.5rem;
+}
+
+.balance h4 {
+  font-size: 0.8rem;
+  display: inline;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+}
+
 .profile {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  margin-left: 200px;
 }
-.profile-photo {
-  width: 200px;
+
+.profile-picture {
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
 }
 
 .sign-out-btn {
-  border: none;
-  margin-top: 50px;
-  width: 150px;
-  background: #3498db;
-  background-image: linear-gradient(to bottom, #f73333, #e76d6d);
-  border-radius: 10px;
-  color: #ffffff;
-  font-size: 22px;
-  font-weight: bold;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .sign-out-btn:hover {
-  background: #3cb0fd;
+  background-color: white;
+  color: #2d3436;
+}
 
-  background-image: linear-gradient(to bottom, #880303, #f81e1e);
-  text-decoration: none;
+.add-transaction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-top: 2rem;
+  color: #252c2e;
+}
+
+.add-transaction input {
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  padding: 0.5rem;
+  width: 20rem;
+}
+
+.add-transaction label {
+  margin-bottom: 0.5rem;
+}
+
+.add-transaction button {
+  background-color: #2d3436;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-transaction button:hover {
+  background-color: #1a1f22;
 }
 
 .transactions {
-  margin-left: 430px;
-  margin-top: 20px;
-  padding-left: 10px;
-  width: 600px;
-  height: 400px;
-  overflow: auto;
-  border: 3px solid #023047;
+  /*background-color: rgb(126, 124, 124);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 3rem;
+  margin-top: 2rem;
+  color: #2d3436;
+  width: 100%;*/
+  width: 420px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(30px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: #141111;
+  border-radius: 10px;
+  padding: 30px 100px;
+}
+
+.transactions h3 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  text-shadow: 1px 1px 2px rgb(245, 243, 243);
+}
+
+.transactions ul {
+  list-style-type: disc;
+  padding: 0;
+}
+
+.transactions li {
+  margin-bottom: 1rem;
+}
+
+.transactions h4 {
+  display: inline;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+.transactions p {
+  display: inline;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.transactions label {
+  display: inline;
+  font-size: 1.2rem;
 }
