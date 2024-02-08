@@ -14,16 +14,28 @@
 }
 
 .expense-tracker-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 1rem;
+  /*justify-content: space-between;*/
+  /*align-items: flex-start;*/
   padding: 2rem;
+  height: 100%;
+  transition: background-color 0.3s ease-in-out;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(
+  /*background: linear-gradient(
     90deg,
     rgb(240, 243, 241) 0%,
     rgb(127, 129, 127) 100%
-  );
+  );*/
+}
+
+.expense-tracker-container.light {
+  background-color: #f5f5f5;
+}
+
+.expense-tracker-container.dark {
+  background-color: #2b2b2b;
 }
 
 .expense-tracker h1 {
@@ -84,7 +96,23 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
+.theme-toggle-btn {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+
+}
+
 .sign-out-btn:hover {
+  background-color: white;
+  color: #2d3436;
+}
+
+.theme-toggle-btn:hover {
   background-color: white;
   color: #2d3436;
 }
@@ -172,4 +200,40 @@
 .transactions label {
   display: inline;
   font-size: 1.2rem;
+}
+
+.light .balance h3,
+.light .balance h2,
+.light .balance h4,
+.light .summary h4,
+.light .summary p,
+.light .add-transaction input[type="text"],
+.light .add-transaction input[type="number"],
+.light .add-transaction button {
+  color: #333;
+}
+
+.light .balance u,
+.light .balance h4,
+.light .summary p,
+.light .add-transaction button {
+  color: #4a90e2;
+}
+
+.dark .balance h3,
+.dark .balance h2,
+.dark .balance h4,
+.dark .summary h4,
+.dark .summary p,
+.dark .add-transaction input[type="text"],
+.dark .add-transaction input[type="number"],
+.dark .add-transaction button {
+  color: #ddd;
+}
+
+.dark .balance u,
+.dark .balance h4,
+.dark .summary p,
+.dark .add-transaction button {
+  color: #4a90e2;
 }

@@ -12,6 +12,11 @@ export const ExpenseTracker = () => {
     const { transactions, transactionTotals } = useGetTransactions();
     const { userName, profilePicture } = useGetUserInfo();
     const navigate = useNavigate();
+    const [theme, setTheme] = useState("light");
+
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"))
+        };
 
     const [description, setDescription] = useState("");
     const [transactionAmount, setTransactionAmount] = useState(0);
@@ -41,9 +46,10 @@ export const ExpenseTracker = () => {
 
     return (
         <>
-        <div className="expense-tracker-container">
+        <div className={`expense-tracker-container ${theme}`}>
         <div className="expense-tracker">
             <div className="container">
+                <button className="theme-toggle-btn" onClick={toggleTheme}> Toggle Dark/Light</button>
                 <h1> {userName}'s Spendy Expense Tracker</h1>
                 <div className="balance">
                     <h3> Your Balance:</h3>
