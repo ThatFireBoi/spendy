@@ -1,4 +1,4 @@
-                                              ![Screenshot 2024-02-15 at 09-38-28 Spendy](https://github.com/ThatFireBoi/spendy/assets/132520554/0ff738ad-cac6-4292-bee5-70b9f64adb50)
+![Screenshot 2024-02-15 at 09-38-28 Spendy](https://github.com/ThatFireBoi/spendy/assets/132520554/0ff738ad-cac6-4292-bee5-70b9f64adb50)
 
 # Spendy
 
