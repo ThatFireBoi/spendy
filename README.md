@@ -18,6 +18,12 @@ Gabriel Castro- Full Stack engineer on Spendy, delving into learning how to leve
 
 React JS, CSS, Firebase, OpenAI
 
+# Mockups
+
+![image](https://github.com/ThatFireBoi/spendy/assets/132520554/de7548e0-707d-474f-8a65-c3d46de9089c)
+![image](https://github.com/ThatFireBoi/spendy/assets/132520554/d522eef6-e440-4eb9-8772-28b06009f3cc)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
