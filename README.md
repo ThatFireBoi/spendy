@@ -37,6 +37,7 @@ Additionally, potential market changes affecting spending habits might impact th
 # Future Features
 
 -Adding advising based on the spending
+
 -Spending alerts
 
 # Getting Started with Create React App
