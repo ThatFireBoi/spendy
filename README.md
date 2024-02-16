@@ -10,6 +10,10 @@ Regarding Spendy, we have so far implemented a database with Firebase, where the
 
 Creating and implementing the GPT has been the most challenging, with the reward system in second place. An alternative we are looking at is Google’s OCR system, which can be implemented with Firebase instead of using the GPT, but this would cause us to loose the chatbot part of the implementation. But in the end, in regards to the MVP, we could go with the OCR as a temporary solution and later on work on implementing the OpenAI GPT. This project is also being built on React JS, which has brought it’s own challenges due to having elements of HTML without using actual HTML files, but instead implementing that functionality inside the javascript files themselves.
 
+# Developers
+
+Gabriel Castro- Full Stack engineer on Spendy, delving into learning how to leverage Firebase and React to create the spending analyzer. During my tenure at Holberton I've acquired knowledge in C, Python and JavaScript, among many other things. This has given me the foundation to be able to embark in attempting to develop this web app. Previous to Holberton, I studied Game Design, with a focus on C# developtment and environmental design by way of Blender, Unity and Unreal Engine. Going forward I hope to join a game development team or partake in web development. 
+
 # Technologies Used
 
 React JS, CSS, Firebase, OpenAI
