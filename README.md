@@ -18,6 +18,28 @@ Gabriel Castro- Full Stack engineer on Spendy, delving into learning how to leve
 
 React JS, CSS, Firebase, OpenAI
 
+# Mockups
+
+![image](https://github.com/ThatFireBoi/spendy/assets/132520554/de7548e0-707d-474f-8a65-c3d46de9089c)
+![image](https://github.com/ThatFireBoi/spendy/assets/132520554/d522eef6-e440-4eb9-8772-28b06009f3cc)
+
+# Risks
+
+Technical Risks:
+
+The primary technical risks involve potential issues with image recognition accuracy while scanning receipts, leading to incorrect data input. This could impact the accuracy of expense tracking and budgeting. To mitigate this, constant refinement and testing of the image recognition system are planned. Additionally, users will have the option to manually edit and verify scanned information to ensure accuracy.
+
+Non-Technical Risks:
+
+Non-technical risks include data security breaches that could compromise users' financial information. Safeguards include robust encryption protocols, regular security audits, and compliance with industry standards to ensure data protection. Moreover, user education on best practices for secure account management will be emphasized to prevent phishing or unauthorized access.
+Additionally, potential market changes affecting spending habits might impact the app's effectiveness. Continuous user feedback and adapting to evolving financial trends will be essential strategies to counter such risks and ensure the app remains relevant and beneficial to users.
+
+# Future Features
+
+-Adding advising based on the spending
+
+-Spending alerts
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
