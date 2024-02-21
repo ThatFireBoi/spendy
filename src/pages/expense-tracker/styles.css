@@ -81,6 +81,7 @@
 .profile-picture {
   width: 5rem;
   height: 5rem;
+  padding: 10px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 1rem;
@@ -177,12 +178,22 @@
 }
 
 .transactions ul {
-  list-style-type: disc;
+  list-style-type: none;
   padding: 0;
 }
 
 .transactions li {
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2d3436;
+  border-top: 1px solid #2d3436;
+  border-left: 1px solid #2d3436;
+  border-right: 1px solid #2d3436;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 0.1rem;
+  border-radius: 1rem;
 }
 
 .transactions h4 {
