@@ -1,4 +1,9 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "./NavBar.css";
+import { NavBar } from "./NavBar"
 import Switch from "react-switch";
 import { useAddTransaction } from "../../hooks/useAddTransaction";
 import { useGetTransactions } from "../../hooks/useGetTransactions";
@@ -33,6 +38,7 @@ export const ExpenseTracker = () => {
         });
         setDescription("");
         setTransactionAmount("");
+        toast.success("Transaction Added Successfully");
     };
 
     const signUserOut = async () => {
@@ -47,29 +53,35 @@ export const ExpenseTracker = () => {
 
     return (
         <>
-        <div className={`expense-tracker-container ${theme}`}>
-        <div className="expense-tracker">
-            <div className="container">
-                <Switch
+        <div className="nav-bar">
+            <NavBar />
+            <Switch
                     checked={theme === "dark"}
                     onChange={handleThemeChange}
                     offColor="#F5F5F5"
                     onColor="#2B2B2B"
                     className="theme-toggle-slider"
                     />
-                <h1> {userName}'s Spendy Expense Tracker</h1>
+                    </div>
+        <div className={`expense-tracker-container ${theme}`}>
+        <div className="expense-tracker">
+            <ToastContainer />
+            <div className="container">
+                {profilePicture && <div className="profile"> <img className="profile-picture" src={profilePicture} alt="" /> <button className="sign-out-btn" onClick={signUserOut}> Sign Out</button></div>}
+                <h1> {userName}'s Spendy Tracker</h1>
                 <div className="balance">
-                    <h3> Your Balance:</h3>
+                    <div className="balance-header">
+                    <h3> Your Balance:</h3></div>
                     {balance >= 0 ? <h2><u>${balance}</u><h4>You are doing great! Keep it up!</h4></h2> : <h2> -${balance * -1} <h4>You are spending more than you are saving!</h4></h2>}
                 </div>
                 <div className="Summary">
                     <div className="Income">
                         <h4>Income</h4>
-                        <p>${income}</p>
+                        <h3>${income}</h3>
                     </div>
                     <div className="Expenses">
                         <h4>Expenses</h4>
-                        <p>${expenses}</p>
+                        <h3>${expenses}</h3>
                     </div>
                 </div>
                 <form className="add-transaction" onSubmit={onSubmit}>
@@ -83,10 +95,10 @@ export const ExpenseTracker = () => {
                     <button type="submit"> Add Transaction</button>
                 </form>
             </div>
-            {profilePicture && <div className="profile"> <img className="profile-picture" src={profilePicture} alt="" /> <button className="sign-out-btn" onClick={signUserOut}> Sign Out</button></div>}
+            {/*{profilePicture && <div className="profile"> <img className="profile-picture" src={profilePicture} alt="" /> <button className="sign-out-btn" onClick={signUserOut}> Sign Out</button></div>}*/}
         </div>
         <div className="transactions">
-        <h3> Transactions</h3>
+        <h2> Transactions</h2>
         <ul>
             {transactions.map((transaction) => {
                 const { description, transactionAmount, transactionType } = transaction;
