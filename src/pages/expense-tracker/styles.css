@@ -8,9 +8,12 @@
   color: white;
   min-height: 100vh;
   padding: 2rem;
+  padding-left: 170px;
+  padding-bottom: 800px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  scroll-behavior: smooth;
 }
 
 .expense-tracker-container {
@@ -46,17 +49,21 @@
 
 .balance,
 .Summary {
-  background-color: white;
+  background-color: rgb(56, 54, 54);
   border: 2px;
   border-radius: 5px;
   padding: 1rem;
   margin-bottom: 2rem;
-  color: #2d3436;
+  color: black;
 }
 
 .balance h2,
 .balance h3 {
   display: inline;
+}
+
+.balance-header {
+  color: #000;
 }
 
 .balance h2 {
@@ -76,6 +83,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-bottom: 1rem;
 }
 
 .profile-picture {
@@ -118,11 +126,18 @@
   color: #2d3436;
 }
 
+.theme-toggle-slider {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-top: 10px;
+}
+
 .add-transaction {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
   border-radius: 5px;
   padding: 1rem;
   margin-top: 2rem;
@@ -200,6 +215,7 @@
   display: inline;
   font-size: 1.2rem;
   font-weight: normal;
+  color: #000;
 }
 
 .transactions p {
@@ -213,38 +229,60 @@
   font-size: 1.2rem;
 }
 
-.light .balance h3,
+/*.light .balance h3,
 .light .balance h2,
 .light .balance h4,
+.light .balance-header,
 .light .summary h4,
 .light .summary p,
 .light .add-transaction input[type="text"],
 .light .add-transaction input[type="number"],
 .light .add-transaction button {
-  color: #333;
-}
+  color: #f3ecec;
+}*/
 
 .light .balance u,
 .light .balance h4,
+.light .balance-header,
 .light .summary p,
 .light .add-transaction button {
   color: #4a90e2;
 }
 
-.dark .balance h3,
+/*.dark .balance h3,
 .dark .balance h2,
 .dark .balance h4,
+.dark .balance-header,
 .dark .summary h4,
 .dark .summary p,
 .dark .add-transaction input[type="text"],
 .dark .add-transaction input[type="number"],
 .dark .add-transaction button {
   color: #ddd;
-}
+}*/
 
 .dark .balance u,
 .dark .balance h4,
+.dark .balance-header,
 .dark .summary p,
 .dark .add-transaction button {
   color: #4a90e2;
+}
+
+/* Default light theme styles */
+p, h1, h2, h3, h4, h5, h6, .balance, .summary, .balance-header {
+    color: black;
+}
+
+h3 {
+  color: white;
+}
+
+h4 {
+  color: white;
+}
+
+/* Dark theme styles */
+.dark p, .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6, .dark .balance, .dark .summary, .dark .balance-header{
+    color: white;
 }
