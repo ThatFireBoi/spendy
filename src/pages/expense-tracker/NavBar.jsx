@@ -1,5 +1,6 @@
 import React from 'react';
-import HomeIcon from '@material-ui/icons/Home';  // Import the icons you want to use
+// Import the icons to use on NavBar
+import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import "./NavBar.css";
