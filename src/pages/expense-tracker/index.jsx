@@ -13,6 +13,9 @@ import { auth } from "../../config/firebase-config";
 import "./styles.css";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { IconButton } from "@material-ui/core";
+
 
 export const ExpenseTracker = () => {
     const { addTransaction } = useAddTransaction();
@@ -104,7 +107,8 @@ export const ExpenseTracker = () => {
         <ul>
             {transactions.map((transaction) => {
                 const { id, description, transactionAmount, transactionType } = transaction;
-                return <li key={id}> <h4> {description} </h4><p> ${transactionAmount} × <label style={{color: transactionType === "expense" ? "red" : "blue"}}> {transactionType} </label></p><button onClick={() => deleteTransaction(id)}>Delete</button></li>
+                return <li key={id}> <h4> {description} </h4><p> ${transactionAmount} × <label style={{color: transactionType === "expense" ? "red" : "blue"}}> 
+                {transactionType} </label></p><IconButton onClick={() => deleteTransaction(id)} aria-label="delete" style={{ color: 'red'}}><DeleteIcon /></IconButton></li>
             
             })}
         </ul>
