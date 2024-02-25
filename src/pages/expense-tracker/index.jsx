@@ -8,6 +8,7 @@ import Switch from "react-switch";
 import { useAddTransaction } from "../../hooks/useAddTransaction";
 import { useGetTransactions } from "../../hooks/useGetTransactions";
 import { useGetUserInfo } from "../../hooks/useGetUserInfo";
+import { useDeleteTransaction } from "../../hooks/useDeleteTransaction";
 import { auth } from "../../config/firebase-config";
 import "./styles.css";
 import { signOut } from "firebase/auth";
@@ -15,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 export const ExpenseTracker = () => {
     const { addTransaction } = useAddTransaction();
+    const { deleteTransaction } = useDeleteTransaction();
     const { transactions, transactionTotals } = useGetTransactions();
     const { userName, profilePicture } = useGetUserInfo();
     const navigate = useNavigate();
@@ -101,8 +103,8 @@ export const ExpenseTracker = () => {
         <h2> Transactions</h2>
         <ul>
             {transactions.map((transaction) => {
-                const { description, transactionAmount, transactionType } = transaction;
-                return <li> <h4> {description} </h4><p> ${transactionAmount} × <label style={{color: transactionType === "expense" ? "red" : "blue"}}> {transactionType} </label></p></li>
+                const { id, description, transactionAmount, transactionType } = transaction;
+                return <li key={id}> <h4> {description} </h4><p> ${transactionAmount} × <label style={{color: transactionType === "expense" ? "red" : "blue"}}> {transactionType} </label></p><button onClick={() => deleteTransaction(id)}>Delete</button></li>
             
             })}
         </ul>
