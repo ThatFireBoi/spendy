@@ -18,7 +18,7 @@ async function getAchievements() {
   try {
       const response = await fetch('http://api.example.com/achievements');
       if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP eUprror! status: ${response.status}`);
       }
       const achievements = await response.json();
       // Handle the achievements data here
