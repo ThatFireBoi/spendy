@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
@@ -9,6 +9,7 @@ import { useAddTransaction } from "../../hooks/useAddTransaction";
 import { useGetTransactions } from "../../hooks/useGetTransactions";
 import { useGetUserInfo } from "../../hooks/useGetUserInfo";
 import { useDeleteTransaction } from "../../hooks/useDeleteTransaction";
+import { useGetBudgets } from "../../hooks/useGetBudgets";
 import { BudgetForm } from "../budgets/BudgetForm";
 import { BudgetList } from "../budgets/BudgetList";
 import { auth } from "../../config/firebase-config";
@@ -24,6 +25,8 @@ export const ExpenseTracker = () => {
     const { deleteTransaction } = useDeleteTransaction();
     const { transactions, transactionTotals } = useGetTransactions();
     const { userName, profilePicture, userID } = useGetUserInfo();
+    const budgets = useGetBudgets(userID);
+    const [selectedBudgetID, setSelectedBudgetID] = useState("");
     const navigate = useNavigate();
     const [theme, setTheme] = useState("light");
 
@@ -40,11 +43,13 @@ export const ExpenseTracker = () => {
         e.preventDefault()
         addTransaction({
             description,
-            transactionAmount,
+            transactionAmount: parseFloat(transactionAmount),
             transactionType,
+            budgetID: selectedBudgetID
         });
         setDescription("");
         setTransactionAmount("");
+        setSelectedBudgetID(null);
         toast.success("Transaction Added Successfully");
     };
 
@@ -98,7 +103,19 @@ export const ExpenseTracker = () => {
                     <label htmlFor="expense"> Expense</label>
                     <input type="radio" id="income" value="income" checked={transactionType === "income"} onChange={(e) => setTransactionType(e.target.value)} />
                     <label htmlFor="income"> Income</label>
-
+                    {transactionType === 'income' && (
+                        <select
+                            value={selectedBudgetID}
+                            onChange={(e) => setSelectedBudgetID(e.target.value)}
+                        >
+                            <option value="">None</option>
+                            {budgets.map((budget) => (
+                                <option key={budget.id} value={budget.id}>
+                                    {budget.name}
+                                </option>
+                            ))}
+                        </select>
+                    )}
                     <button type="submit"> Add Transaction</button>
                 </form>
             </div>

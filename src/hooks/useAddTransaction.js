@@ -10,12 +10,13 @@ export const useAddTransaction = () => {
       description,
       transactionAmount,
       transactionType,
-      budgetID
+      budgetID = "" // Defaults to an empty string
     }) => {
+      const amountNumber = parseFloat(transactionAmount);
       await addDoc(transactionCollectionRef, {
           userID,
           description,
-          transactionAmount,
+          transactionAmount: amountNumber,
           transactionType,
           createdAt: serverTimestamp(),
       });
@@ -23,8 +24,7 @@ export const useAddTransaction = () => {
           const budgetRef = doc(db, 'budgets', budgetID); // Assuming you have a budgetID
           getDoc(budgetRef).then((docSnap) => {
             if (docSnap.exists()) {
-              const amountToAdd = Number(transactionAmount);
-              const newCurrentAmount = docSnap.data().currentAmount + amountToAdd;
+              const newCurrentAmount = Number(docSnap.data().currentAmount) + amountNumber;
               updateDoc(budgetRef, { currentAmount: newCurrentAmount });
             }
           });
