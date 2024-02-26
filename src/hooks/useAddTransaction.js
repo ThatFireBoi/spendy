@@ -23,7 +23,8 @@ export const useAddTransaction = () => {
           const budgetRef = doc(db, 'budgets', budgetID); // Assuming you have a budgetID
           getDoc(budgetRef).then((docSnap) => {
             if (docSnap.exists()) {
-              const newCurrentAmount = docSnap.data().currentAmount + transactionAmount;
+              const amountToAdd = Number(transactionAmount);
+              const newCurrentAmount = docSnap.data().currentAmount + amountToAdd;
               updateDoc(budgetRef, { currentAmount: newCurrentAmount });
             }
           });
