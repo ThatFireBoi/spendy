@@ -14,6 +14,8 @@ Creating and implementing the GPT has been the most challenging, with the reward
 
 Gabriel Castro- Full Stack engineer on Spendy, delving into learning how to leverage Firebase and React to create the spending analyzer. During my tenure at Holberton I've acquired knowledge in C, Python and JavaScript, among many other things. This has given me the foundation to be able to embark in attempting to develop this web app. Previous to Holberton, I studied Game Design, with a focus on C# developtment and environmental design by way of Blender, Unity and Unreal Engine. Going forward I hope to join a game development team or partake in web development. 
 
+Natalia Rivera- As a Lead Developer at Spendy, I'm currently immersing myself in integrating APIs to build a an engaaging and unique spending analyzer. My experience at Holberton has equipped me with skills in C, Python, and JavaScript, providing me with the necessary groundwork to undertake this project.
+
 # Technologies Used
 
 React JS, CSS, Firebase, OpenAI

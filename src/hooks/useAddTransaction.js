@@ -1,4 +1,4 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp, doc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 import { useGetUserInfo } from "./useGetUserInfo";
 // From the useAddTransaction.js file, we are importing the addDoc, collection, serverTimestamp, and db from the firebase/firestore and 
@@ -10,14 +10,25 @@ export const useAddTransaction = () => {
       description,
       transactionAmount,
       transactionType,
+      budgetID = "" // Defaults to an empty string
     }) => {
+      const amountNumber = parseFloat(transactionAmount);
       await addDoc(transactionCollectionRef, {
           userID,
           description,
-          transactionAmount,
+          transactionAmount: amountNumber,
           transactionType,
           createdAt: serverTimestamp(),
       });
-    };
-  return { addTransaction };
-};
+        if (transactionType === 'income' && budgetID) {
+          const budgetRef = doc(db, 'budgets', budgetID); // Assuming you have a budgetID
+          getDoc(budgetRef).then((docSnap) => {
+            if (docSnap.exists()) {
+              const newCurrentAmount = Number(docSnap.data().currentAmount) + amountNumber;
+              updateDoc(budgetRef, { currentAmount: newCurrentAmount });
+            }
+          });
+        }
+      }
+      return { addTransaction };
+    }
