@@ -9,6 +9,8 @@ import { useAddTransaction } from "../../hooks/useAddTransaction";
 import { useGetTransactions } from "../../hooks/useGetTransactions";
 import { useGetUserInfo } from "../../hooks/useGetUserInfo";
 import { useDeleteTransaction } from "../../hooks/useDeleteTransaction";
+import { BudgetForm } from "../budgets/BudgetForm";
+import { BudgetList } from "../budgets/BudgetList";
 import { auth } from "../../config/firebase-config";
 import "./styles.css";
 import { signOut } from "firebase/auth";
@@ -21,7 +23,7 @@ export const ExpenseTracker = () => {
     const { addTransaction } = useAddTransaction();
     const { deleteTransaction } = useDeleteTransaction();
     const { transactions, transactionTotals } = useGetTransactions();
-    const { userName, profilePicture } = useGetUserInfo();
+    const { userName, profilePicture, userID } = useGetUserInfo();
     const navigate = useNavigate();
     const [theme, setTheme] = useState("light");
 
@@ -113,6 +115,11 @@ export const ExpenseTracker = () => {
             })}
         </ul>
         </div>
+        <div className="budget-section">
+                    <h2>Manage Your Budgets</h2>
+                    <BudgetForm userID={userID} />
+                    <BudgetList userID={userID} />
+                </div>
         </div>
         </>
     );

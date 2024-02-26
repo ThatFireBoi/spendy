@@ -286,3 +286,54 @@ h4 {
 .dark p, .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6, .dark .balance, .dark .summary, .dark .balance-header{
     color: white;
 }
+
+.budget-section {
+  background-color: rgb(56, 54, 54);
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.budget-item {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #2d3436;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar-container {
+  width: 100%;
+  background-color: #e0e0de;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.progress-bar-fill {
+  background-color: #2196f3;
+  height: 20px;
+  border-radius: 8px;
+  text-align: right;
+  padding-right: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.expense-tracker-container.light .budget-section,
+.expense-tracker-container.light .budget-item {
+  background-color: #f5f5f5; /* Lighter color for light theme */
+  color: #2d3436;
+}
+
+.expense-tracker-container.dark .budget-section,
+.expense-tracker-container.dark .budget-item {
+  background-color: #2b2b2b; /* Darker color for dark theme */
+  color: white;
+}
