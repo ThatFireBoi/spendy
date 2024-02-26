@@ -19,11 +19,11 @@ export const useAddTransaction = () => {
           transactionType,
           createdAt: serverTimestamp(),
       });
-        if (transactionType === 'income') {
+        if (transactionType === 'income' && budgetID) {
           const budgetRef = doc(db, 'budgets', budgetID); // Assuming you have a budgetID
-          getDoc(budgetRef).then((doc) => {
-            if (doc.exists()) {
-              const newCurrentAmount = doc.data().currentAmount + transactionAmount;
+          getDoc(budgetRef).then((docSnap) => {
+            if (docSnap.exists()) {
+              const newCurrentAmount = docSnap.data().currentAmount + transactionAmount;
               updateDoc(budgetRef, { currentAmount: newCurrentAmount });
             }
           });
