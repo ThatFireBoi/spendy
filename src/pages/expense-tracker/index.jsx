@@ -19,23 +19,14 @@ import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 import { Doughnut } from "react-chartjs-2";
+// eslint-disable-next-line no-unused-vars
+import Chart from "chart.js/auto";
 
 
 export const ExpenseTracker = () => {
     const { addTransaction } = useAddTransaction();
     const { deleteTransaction } = useDeleteTransaction();
     const { transactions, transactionTotals } = useGetTransactions();
-    // Data preparation for Doughnut chart
-    const data = {
-    labels: ['Income', 'Expenses'],
-    datasets: [
-    {
-        data: [transactionTotals.income, transactionTotals.expenses],
-        backgroundColor: ['#36A2EB', '#FF6384'],
-        hoverBackgroundColor: ['#36A2EB', '#FF6384']
-    }
-    ]
-                };
     const { userName, profilePicture, userID } = useGetUserInfo();
     const budgets = useGetBudgets(userID);
     const [selectedBudgetID, setSelectedBudgetID] = useState("");
@@ -45,6 +36,26 @@ export const ExpenseTracker = () => {
     const handleThemeChange = (checked) => {
         setTheme(checked ? "dark" : "light");
     };
+
+    const data = {
+  labels: ['Income', 'Expenses'],
+  datasets: [
+    {
+      label: 'Transaction Overview',
+      data: [transactionTotals.income, transactionTotals.expenses],
+      backgroundColor: [
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+      ],
+      borderColor: [
+        'rgba(75, 192, 192, 1)',
+        'rgba(255, 99, 132, 1)',
+      ],
+      borderWidth: 1,
+      hoverOffset: 20
+    }
+  ]
+};
 
     const [description, setDescription] = useState("");
     const [transactionAmount, setTransactionAmount] = useState(0);
@@ -138,7 +149,7 @@ export const ExpenseTracker = () => {
         <ul>
             {transactions.map((transaction) => {
                 const { id, description, transactionAmount, transactionType } = transaction;
-                return <li key={id}> <h4> {description} </h4><p> ${transactionAmount} × <label style={{color: transactionType === "expense" ? "red" : "blue"}}> 
+                return <li key={id}> <h4> {description} </h4><p> ${transactionAmount} × <label style={{color: transactionType === "expense" ? "#FF6384" : "#36A2EB"}}> 
                 {transactionType} </label></p><IconButton onClick={() => deleteTransaction(id)} aria-label="delete" style={{ color: 'red'}}><DeleteIcon /></IconButton></li>
             
             })}
