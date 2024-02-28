@@ -9,10 +9,10 @@ export const ProgressBar = ({ currentAmount, targetAmount }) => {
                 style={{ 
                     width: `${progress}%`, 
                     backgroundColor: progress === 100 ? '#4caf50' : '#2196f3',
-                    textAlign: 'right',
+                    textAlign: 'center',
                     borderRadius: '8px',
                     padding: '4px 0',
-                    color: 'white',
+                    color: 'black',
                     transition: 'width 0.5s ease-in-out'
                 }}
             >
