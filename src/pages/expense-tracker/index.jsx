@@ -18,12 +18,24 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
+import { Doughnut } from "react-chartjs-2";
 
 
 export const ExpenseTracker = () => {
     const { addTransaction } = useAddTransaction();
     const { deleteTransaction } = useDeleteTransaction();
     const { transactions, transactionTotals } = useGetTransactions();
+    // Data preparation for Doughnut chart
+    const data = {
+    labels: ['Income', 'Expenses'],
+    datasets: [
+    {
+        data: [transactionTotals.income, transactionTotals.expenses],
+        backgroundColor: ['#36A2EB', '#FF6384'],
+        hoverBackgroundColor: ['#36A2EB', '#FF6384']
+    }
+    ]
+                };
     const { userName, profilePicture, userID } = useGetUserInfo();
     const budgets = useGetBudgets(userID);
     const [selectedBudgetID, setSelectedBudgetID] = useState("");
@@ -131,6 +143,9 @@ export const ExpenseTracker = () => {
             
             })}
         </ul>
+        <div className="donut-graph-section">
+            <Doughnut data={data} />
+        </div>
         </div>
         <div className="budget-section">
                     <h2>Manage Your Budgets</h2>
