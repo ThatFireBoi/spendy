@@ -32,29 +32,50 @@ export const ExpenseTracker = () => {
     const [selectedBudgetID, setSelectedBudgetID] = useState("");
     const navigate = useNavigate();
     const [theme, setTheme] = useState("light");
+    const expenseCategories = ['Food', 'Clothing', 'Entertainment', 'Home', 'Utilities', 'Other'];
+    const [expenseCategory, setExpenseCategory] = useState(expenseCategories[0]);
+
 
     const handleThemeChange = (checked) => {
         setTheme(checked ? "dark" : "light");
     };
 
-    const data = {
-  labels: ['Income', 'Expenses'],
-  datasets: [
-    {
-      label: 'Transaction Overview',
-      data: [transactionTotals.income, transactionTotals.expenses],
-      backgroundColor: [
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(255, 99, 132, 0.2)',
-      ],
-      borderColor: [
-        'rgba(75, 192, 192, 1)',
-        'rgba(255, 99, 132, 1)',
-      ],
-      borderWidth: 1,
-      hoverOffset: 20
-    }
-  ]
+    const categoryColors = {
+        'Income': 'rgba(75, 192, 192, 0.2)', // Colors for income and categories
+        'Food': 'rgba(255, 99, 132, 0.2)',
+        'Clothing': 'rgba(54, 162, 235, 0.2)',
+        'Entertainment': 'rgba(255, 206, 86, 0.2)',
+        'Home': 'rgba(153, 102, 255, 0.2)',
+        'Utilities': 'rgba(255, 159, 64, 0.2)',
+        'Other': 'rgba(201, 203, 207, 0.2)'
+};
+
+
+    // Initialized income to always include it in the chart
+    const aggregatedData = {
+        'Income': 0,
+};
+
+    // Aggregate income and expenses
+    transactions.forEach(transaction => {
+    const category = transaction.transactionType === 'income' ? 'Income' : transaction.category;
+        if (!aggregatedData[category]) {
+            aggregatedData[category] = 0;
+        }
+            aggregatedData[category] += parseFloat(transaction.transactionAmount);
+});
+
+
+    const chartData = {
+        labels: Object.keys(aggregatedData),
+        datasets: [{
+            label: 'Transactions Overview',
+            data: Object.values(aggregatedData),
+            backgroundColor: Object.keys(aggregatedData).map(category => categoryColors[category] || 'rgba(128, 128, 128, 0.2)'),
+            borderColor: Object.keys(aggregatedData).map(category => categoryColors[category].replace('0.2', '1')),
+            borderWidth: 1,
+            hoverOffset: 20
+    }]
 };
 
     const [description, setDescription] = useState("");
@@ -68,6 +89,7 @@ export const ExpenseTracker = () => {
             description,
             transactionAmount: parseFloat(transactionAmount),
             transactionType,
+            category: transactionType === "expense" ? expenseCategory : "",
             budgetID: selectedBudgetID
         });
         setDescription("");
@@ -124,6 +146,14 @@ export const ExpenseTracker = () => {
                     <input type="number" placeholder="Amount" value={transactionAmount} required onChange={(e) => setTransactionAmount(e.target.value)}/>
                     <input type="radio" id="expense" value="expense" checked={transactionType === "expense"} onChange={(e) => setTransactionType(e.target.value)} />
                     <label htmlFor="expense"> Expense</label>
+                    {transactionType === 'expense' && (
+                        <select value={expenseCategory} onChange={(e) => setExpenseCategory(e.target.value)}>
+                            {expenseCategories.map(category => (
+                            <option key={category} value={category}>{category}</option>
+                        ))}
+                        </select>
+                    )}
+
                     <input type="radio" id="income" value="income" checked={transactionType === "income"} onChange={(e) => setTransactionType(e.target.value)} />
                     <label htmlFor="income"> Income</label>
                     {transactionType === 'income' && (
@@ -155,7 +185,7 @@ export const ExpenseTracker = () => {
             })}
         </ul>
         <div className="donut-graph-section">
-            <Doughnut data={data} />
+            <Doughnut data={chartData} />
         </div>
         </div>
         <div className="budget-section">
