@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAddBudget } from "../../hooks/useAddBudget";
 
+
 export const BudgetForm = () => {
   const { addBudget } = useAddBudget();
   const [name, setName] = useState('');

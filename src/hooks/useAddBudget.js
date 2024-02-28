@@ -1,6 +1,8 @@
 import { db } from "../config/firebase-config";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useGetUserInfo } from "./useGetUserInfo";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const useAddBudget = () => {
   const { userID } = useGetUserInfo();
@@ -12,6 +14,7 @@ export const useAddBudget = () => {
       userID,
       createdAt: serverTimestamp(),
     });
+    toast.success('Budget added successfully!');
   };
   
   return { addBudget };
