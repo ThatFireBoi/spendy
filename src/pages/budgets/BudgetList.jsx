@@ -12,9 +12,9 @@ export const BudgetList = ({ userID }) => {
         <ul>
           {budgets.map((budget) => (
             <li key={budget.id} className="budget-item">
-              <h3>{budget.name}</h3>
-              <p>Target Amount: ${budget.targetAmount}</p>
-              <p>Current Amount: ${budget.currentAmount}</p>
+              <p><b>{budget.name}|</b></p>
+              <p><u>Target Amount</u>: ${budget.targetAmount}</p>
+              <p><u>Current Amount</u>: ${budget.currentAmount}</p>
               <ProgressBar currentAmount={budget.currentAmount} targetAmount={budget.targetAmount} />
             </li>
           ))}
