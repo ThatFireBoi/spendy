@@ -18,6 +18,7 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
+import { FaMoon, FaSun } from "react-icons/fa";
 import { Doughnut } from "react-chartjs-2";
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
@@ -112,14 +113,20 @@ export const ExpenseTracker = () => {
         <>
         <div className="nav-bar">
             <NavBar />
+            <div className="theme-switch-wrapper">
+                <label htmlFor="theme-switch" className="theme-switch">
+                    {theme === 'light' ? <FaSun color="#f39c12" size="1.5em" /> : <FaMoon color="#f39c12" size="1.5em" />}
+                </label>
             <Switch
-                    checked={theme === "dark"}
-                    onChange={handleThemeChange}
-                    offColor="#F5F5F5"
-                    onColor="#2B2B2B"
-                    className="theme-toggle-slider"
-                    />
-                    </div>
+                checked={theme === 'dark'}
+                onChange={handleThemeChange}
+                offColor="#f39c12"
+                onColor="#353535"
+                className="theme-toggle-slider"
+                id="theme-switch"
+            />
+            </div>
+        </div>
         <div className={`expense-tracker-container ${theme}`}>
         <div className="expense-tracker">
             <ToastContainer />

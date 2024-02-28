@@ -105,6 +105,15 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.theme-switch {
+  margin-right: 30px; /* Adjust spacing as needed */
+}
+
 .theme-toggle-btn {
   background-color: transparent;
   border: 1px solid white;
