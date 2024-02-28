@@ -88,11 +88,11 @@ export const ExpenseTracker = () => {
                 </div>
                 <div className="Summary">
                     <div className="Income">
-                        <h4>Income</h4>
+                        <h4><u>Income</u></h4>
                         <h3>${income}</h3>
                     </div>
                     <div className="Expenses">
-                        <h4>Expenses</h4>
+                        <h4><u>Expenses</u></h4>
                         <h3>${expenses}</h3>
                     </div>
                 </div>
