@@ -9,6 +9,7 @@ export const useAddTransaction = () => {
       description,
       transactionAmount,
       transactionType,
+      category,
       budgetID = "" // Defaults to an empty string
     }) => {
       const amountNumber = parseFloat(transactionAmount);
@@ -17,6 +18,7 @@ export const useAddTransaction = () => {
           description,
           transactionAmount: amountNumber,
           transactionType,
+          category,
           createdAt: serverTimestamp(),
       });
         if (transactionType === 'income' && budgetID) {
