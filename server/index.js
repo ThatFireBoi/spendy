@@ -3,33 +3,59 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const multer = require('multer');
-const upload = multer();
+const fs = require('fs');
+const { google } = require('googleapis');
 
+const upload = multer({ dest: 'uploads/' }); // Temporarily store files in an 'uploads' directory
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(express.json());
+
+// Function to obtain Google OAuth2 client
+const getGoogleAuthClient = () => {
+  const auth = new google.auth.GoogleAuth({
+    keyFilename: "./spendy-415019-320f965b8139.json", // Path to your Google Service Account Key File
+    scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+  });
+
+  return auth.getClient();
+};
 
 app.post('/api/parse-receipt', upload.single('receipt'), async (req, res) => {
   if (!req.file) {
     return res.status(400).send('No file uploaded.');
   }
 
+  const filePath = req.file.path;
+  const fileContent = fs.readFileSync(filePath, 'base64');
+
   try {
-    // Replace YOUR_PROJECT_ID and YOUR_LOCATION with your Google Cloud project ID and location
-    const url = `https://us-documentai.googleapis.com/v1/projects/527901588680/locations/us/processors/ee3b1231d40bd7c1:process`;
-    const response = await axios.post(url, {
-      // Configure the request payload according to Google Document AI API documentation
-      // This includes setting the correct content type and the base64-encoded file content
-    }, {
-      headers: {
-        'Authorization': `Bearer YOUR_ACCESS_TOKEN`, // Securely obtain the access token
-        'Content-Type': 'application/json',
+    const client = await getGoogleAuthClient();
+    const url = `https://documentai.googleapis.com/v1/projects/YOUR_PROJECT_ID/locations/YOUR_LOCATION/documents:process`;
+
+    const response = await axios.post(
+      url,
+      {
+        document: {
+          content: fileContent,
+          mimeType: 'application/pdf', // adjust this according to your file type
+        },
       },
-    });
+      {
+        headers: {
+          'Authorization': `Bearer ${(await client.getAccessToken()).token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    fs.unlinkSync(filePath); // Clean up the temporary file
 
     // Parse the response from Document AI and send the relevant data back to the client
-    res.json(response.data);
+    const parsedData = response.data;
+    res.json(parsedData);
   } catch (error) {
     console.error('Error calling Document AI API:', error);
     res.status(500).send('Error processing receipt.');
