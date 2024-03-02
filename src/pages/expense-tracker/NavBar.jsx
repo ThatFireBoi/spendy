@@ -5,6 +5,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import "./NavBar.css";
 import logo from "./spendyLogo.png";
+import { Link } from 'react-router-dom';
 
 
 export const NavBar = () => {
@@ -13,7 +14,7 @@ export const NavBar = () => {
             <img src={logo} alt="logo" className="nav-logo"/>
             <ul>
                 <li><HomeIcon /><a href="/">Transactions</a></li>
-                <li><InfoIcon /><a href="/">Scanner</a></li>
+                <li><InfoIcon /><Link to="/scanner">Scanner</Link></li>
                 <li><EmojiEventsIcon /><a href="/">Achievements</a></li>
             </ul>
         </nav>
