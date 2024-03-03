@@ -374,6 +374,7 @@ h4 {
   background-color: #4CAF50;
   border: none;
   color: white;
+  border-radius: 5px;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -381,4 +382,5 @@ h4 {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 }

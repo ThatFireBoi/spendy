@@ -12,7 +12,7 @@ import { useDeleteTransaction } from "../../hooks/useDeleteTransaction";
 import { useGetBudgets } from "../../hooks/useGetBudgets";
 import { BudgetForm } from "../budgets/BudgetForm";
 import { BudgetList } from "../budgets/BudgetList";
-// import { Scanner } from "../scanner/scanner";
+import { Scanner } from "../scanner/scanner";
 import { auth } from "../../config/firebase-config";
 import "./styles.css";
 import { signOut } from "firebase/auth";
@@ -25,30 +25,30 @@ import { Doughnut } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
 function convertToCSV(data) {
-  const csvRows = [];
-  const headers = Object.keys(data[0]);
-  csvRows.push(headers.join(','));
+    const csvRows = [];
+    const headers = Object.keys(data[0]);
+    csvRows.push(headers.join(','));
 
-  for (const row of data) {
-    const values = headers.map(header => {
-      const escaped = ('' + row[header]).replace(/"/g, '\\"');
-      return `"${escaped}"`;
+    for (const row of data) {
+        const values = headers.map(header => {
+        const escaped = ('' + row[header]).replace(/"/g, '\\"');
+        return `"${escaped}"`;
     });
     csvRows.push(values.join(','));
-  }
-  return csvRows.join('\n');
+    }
+        return csvRows.join('\n');
 }
 
 function downloadCSV(data) {
-  const blob = new Blob([data], { type: 'text/csv' });
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.setAttribute('hidden', '');
-  a.setAttribute('href', url);
-  a.setAttribute('download', 'transactions.csv');
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+    const blob = new Blob([data], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'transactions.csv');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 }
 
 export const ExpenseTracker = () => {
@@ -230,6 +230,10 @@ export const ExpenseTracker = () => {
                     <BudgetForm userID={userID} />
                     <BudgetList userID={userID} />
                 </div>
+                <div className="scanner-section">
+            <h2>Upload Receipts</h2>
+            <Scanner userID={userID} />
+        </div>
         </div>
         </>
     );
