@@ -6,25 +6,27 @@ import { useFetchReceipts } from '../../hooks/useFetchReceipts';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import React from 'react';
 import './scanner.css';
+import DeleteIcon from "@material-ui/icons/Delete";
+import { IconButton } from "@material-ui/core";
 
 export const Scanner = ({ userID }) => {
   const [receipts, triggerRefetch] = useFetchReceipts(userID);
   const [selectedImageUrl, setSelectedImageUrl] = useState('');
+  const [fileToUpload, setFileToUpload] = useState(null);
 
   const thumbnailStyle = {
-    maxWidth: '100px',
-    maxHeight: '100px',
+    maxWidth: '150px',
+    maxHeight: '150px',
     cursor: 'pointer'
   };
 
-  const uploadImage = async (file, userID) => {
-    if (!file) return;
+  const uploadImage = async () => {
+    if (!fileToUpload) return;
 
-    const storageRef = ref(storage, `receipts/${file.name}`);
-    await uploadBytes(storageRef, file);
+    const storageRef = ref(storage, `receipts/${fileToUpload.name}`);
+    await uploadBytes(storageRef, fileToUpload);
 
     const downloadUrl = await getDownloadURL(storageRef);
-    // setImageUrl(downloadUrl);
 
     const receiptsCollectionRef = collection(db, 'receipts');
     await addDoc(receiptsCollectionRef, {
@@ -32,47 +34,57 @@ export const Scanner = ({ userID }) => {
       imageUrl: downloadUrl,
       timestamp: new Date(),
     });
+
+    setFileToUpload(null);
+    triggerRefetch();
   };
 
-  // Function to delete the image
-    const deleteImage = async (imageUrl) => {
-        const imageQuery = query(collection(db, 'receipts'), where('imageUrl', '==', imageUrl));
-        const querySnapshot = await getDocs(imageQuery);
-        querySnapshot.forEach((doc) => {
-            deleteDoc(doc.ref);
-        });
+  const deleteImage = async (imageUrl) => {
+    const imageQuery = query(collection(db, 'receipts'), where('imageUrl', '==', imageUrl));
+    const querySnapshot = await getDocs(imageQuery);
+    querySnapshot.forEach((doc) => {
+      deleteDoc(doc.ref);
+    });
 
-        const imageRef = ref(storage, imageUrl);
-        await deleteObject(imageRef);
+    const imageRef = ref(storage, imageUrl);
+    await deleteObject(imageRef);
 
-        triggerRefetch();
-    };
+    triggerRefetch();
+  };
 
-    // Overlay close function
-    const closeOverlay = () => setSelectedImageUrl('');
+  // Overlay close
+  const closeOverlay = () => setSelectedImageUrl('');
 
   return (
     <div className='receipt-list'>
       <h1>Receipt List</h1>
-      <input type="file" onChange={(e) => uploadImage(e.target.files[0], userID)} />
-      
+      <input type="file" onChange={(e) => setFileToUpload(e.target.files[0])} />
+      <button onClick={uploadImage} disabled={!fileToUpload}>Upload Image</button>
+
       <div>
-            {receipts.map((url, index) => (
-                <div key={index}>
-                    <img 
-                        src={url} 
-                        alt={`Uploaded Receipt ${index + 1}`} 
-                        style={thumbnailStyle} 
-                        onClick={() => setSelectedImageUrl(url)}
-                    />
-                    <button onClick={() => deleteImage(url)}>Delete</button>
-                </div>
-            ))}
+        {receipts.map((url, index) => (
+          <div key={index}>
+            <img 
+              src={url} 
+              alt={`Uploaded Receipt ${index + 1}`} 
+              style={thumbnailStyle} 
+              onClick={() => setSelectedImageUrl(url)}
+            />
+            <IconButton onClick={() => deleteImage(url)} aria-label="delete" style={{ color: 'red'}}>
+              <DeleteIcon />
+            </IconButton>
+          </div>
+        ))}
       </div>
 
       {selectedImageUrl && (
         <div className="overlay" onClick={closeOverlay}>
-          <img src={selectedImageUrl} alt="Selected Receipt" className="large-image" onClick={(e) => e.stopPropagation()} />
+          <img 
+            src={selectedImageUrl} 
+            alt="Selected Receipt" 
+            className="large-image" 
+            onClick={(e) => e.stopPropagation()}
+          />
         </div>
       )}
     </div>
