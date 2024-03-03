@@ -12,7 +12,7 @@ import { useDeleteTransaction } from "../../hooks/useDeleteTransaction";
 import { useGetBudgets } from "../../hooks/useGetBudgets";
 import { BudgetForm } from "../budgets/BudgetForm";
 import { BudgetList } from "../budgets/BudgetList";
-import { Scanner } from "../scanner/scanner";
+// import { Scanner } from "../scanner/scanner";
 import { auth } from "../../config/firebase-config";
 import "./styles.css";
 import { signOut } from "firebase/auth";
@@ -24,6 +24,32 @@ import { Doughnut } from "react-chartjs-2";
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
 
+function convertToCSV(data) {
+  const csvRows = [];
+  const headers = Object.keys(data[0]);
+  csvRows.push(headers.join(','));
+
+  for (const row of data) {
+    const values = headers.map(header => {
+      const escaped = ('' + row[header]).replace(/"/g, '\\"');
+      return `"${escaped}"`;
+    });
+    csvRows.push(values.join(','));
+  }
+  return csvRows.join('\n');
+}
+
+function downloadCSV(data) {
+  const blob = new Blob([data], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.setAttribute('hidden', '');
+  a.setAttribute('href', url);
+  a.setAttribute('download', 'transactions.csv');
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
 
 export const ExpenseTracker = () => {
     const { addTransaction } = useAddTransaction();
@@ -130,6 +156,8 @@ export const ExpenseTracker = () => {
         </div>
         <div className={`expense-tracker-container ${theme}`}>
         <div className="expense-tracker">
+            <body><script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+            <script src="https://mediafiles.botpress.cloud/60455ef1-33d9-4a61-b615-2cd02ecc452b/webchat/config.js" defer></script></body>
             <ToastContainer />
             <div className="container">
                 {profilePicture && <div className="profile"> <img className="profile-picture" src={profilePicture} alt="" /> <button className="sign-out-btn" onClick={signUserOut}> Sign Out</button></div>}
@@ -179,6 +207,7 @@ export const ExpenseTracker = () => {
                     )}
                     <button type="submit"> Add Transaction</button>
                 </form>
+                <button onClick={() => downloadCSV(convertToCSV(transactions))} className="download-csv-button">Download Transactions as CSV</button>
             </div>
             {/*{profilePicture && <div className="profile"> <img className="profile-picture" src={profilePicture} alt="" /> <button className="sign-out-btn" onClick={signUserOut}> Sign Out</button></div>}*/}
         </div>
@@ -201,10 +230,6 @@ export const ExpenseTracker = () => {
                     <BudgetForm userID={userID} />
                     <BudgetList userID={userID} />
                 </div>
-                <div className="scanner-section">
-            <h2>Upload Receipts</h2>
-            <Scanner userID={userID} />
-        </div>
         </div>
         </>
     );

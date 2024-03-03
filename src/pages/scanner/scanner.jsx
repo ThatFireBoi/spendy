@@ -7,14 +7,14 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import React from 'react';
 
 export const Scanner = ({ userID }) => {
-  const [imageUrl, setImageUrl] = useState('');
+  const [selectedImageUrl, setSelectedImageUrl] = useState('');
   const receipts = useFetchReceipts(userID);
 
   const thumbnailStyle = {
-  maxWidth: '50px',
-  maxHeight: '50px',
-  cursor: 'pointer'
-};
+    maxWidth: '100px',
+    maxHeight: '100px',
+    cursor: 'pointer'
+  };
 
   const uploadImage = async (file, userID) => {
     if (!file) return;
@@ -23,28 +23,35 @@ export const Scanner = ({ userID }) => {
     await uploadBytes(storageRef, file);
 
     const downloadUrl = await getDownloadURL(storageRef);
-    setImageUrl(downloadUrl);
+    // setImageUrl(downloadUrl);
 
     const receiptsCollectionRef = collection(db, 'receipts');
-  await addDoc(receiptsCollectionRef, {
-    userID: userID,
-    imageUrl: downloadUrl,
-    timestamp: new Date(),
-  });
+    await addDoc(receiptsCollectionRef, {
+      userID: userID,
+      imageUrl: downloadUrl,
+      timestamp: new Date(),
+    });
   };
 
   return (
-    <div>
+    <div className='receipt-list'>
       <h1>Scanner</h1>
       <input type="file" onChange={(e) => uploadImage(e.target.files[0], userID)} />
-      {imageUrl && (
-      <div> <img src={imageUrl} alt="Uploaded Receipt" />
-      </div>)}
+      
       <div>
         {receipts.map((url, index) => (
-          <img key={index} src={url} alt={`Uploaded Receipt ${index + 1}`} style={thumbnailStyle} onClick={() => setImageUrl(url)} />
+          <img key={index} src={url} alt={`Uploaded Receipt ${index + 1}`} 
+              style={thumbnailStyle} 
+              onClick={() => setSelectedImageUrl(url)} />
         ))}
       </div>
+
+      {selectedImageUrl && (
+        <div>
+          <img src={selectedImageUrl} alt="Selected Receipt" />
+        </div>
+      )}
     </div>
   );
 };
+
