@@ -12,6 +12,7 @@ import { useDeleteTransaction } from "../../hooks/useDeleteTransaction";
 import { useGetBudgets } from "../../hooks/useGetBudgets";
 import { BudgetForm } from "../budgets/BudgetForm";
 import { BudgetList } from "../budgets/BudgetList";
+import { Scanner } from "../scanner/scanner";
 import { auth } from "../../config/firebase-config";
 import "./styles.css";
 import { signOut } from "firebase/auth";
@@ -200,6 +201,10 @@ export const ExpenseTracker = () => {
                     <BudgetForm userID={userID} />
                     <BudgetList userID={userID} />
                 </div>
+                <div className="scanner-section">
+            <h2>Upload Receipts</h2>
+            <Scanner userID={userID} />
+        </div>
         </div>
         </>
     );

@@ -309,6 +309,19 @@ h4 {
   color: #141111;
 }
 
+.scanner-section {
+  width: 420px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(30px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: rgb(56, 54, 54);
+  border-radius: 10px;
+  padding: 30px 100px;
+  margin-bottom: 2rem;
+  color: #141111;
+}
+
 .budget-item {
   margin-bottom: 1rem;
   display: flex;
