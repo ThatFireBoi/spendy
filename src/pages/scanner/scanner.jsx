@@ -10,6 +10,12 @@ export const Scanner = ({ userID }) => {
   const [imageUrl, setImageUrl] = useState('');
   const receipts = useFetchReceipts(userID);
 
+  const thumbnailStyle = {
+  maxWidth: '50px',
+  maxHeight: '50px',
+  cursor: 'pointer'
+};
+
   const uploadImage = async (file, userID) => {
     if (!file) return;
 
@@ -31,10 +37,12 @@ export const Scanner = ({ userID }) => {
     <div>
       <h1>Scanner</h1>
       <input type="file" onChange={(e) => uploadImage(e.target.files[0], userID)} />
-      {imageUrl && <img src={imageUrl} alt="Uploaded Receipt" />}
+      {imageUrl && (
+      <div> <img src={imageUrl} alt="Uploaded Receipt" />
+      </div>)}
       <div>
         {receipts.map((url, index) => (
-          <img key={index} src={url} alt={`Uploaded Receipt ${index + 1}`} />
+          <img key={index} src={url} alt={`Uploaded Receipt ${index + 1}`} style={thumbnailStyle} onClick={() => setImageUrl(url)} />
         ))}
       </div>
     </div>
