@@ -53,7 +53,7 @@ export const Scanner = ({ userID }) => {
 
   return (
     <div className='receipt-list'>
-      <h1>Scanner</h1>
+      <h1>Receipt List</h1>
       <input type="file" onChange={(e) => uploadImage(e.target.files[0], userID)} />
       
       <div>
