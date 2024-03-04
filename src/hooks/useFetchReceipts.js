@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { db } from '../config/firebase-config';
-import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
+import { useEffect, useState } from "react";
+import { db } from "../config/firebase-config";
+import { collection, query, where, orderBy, getDocs } from "firebase/firestore";
 
 export const useFetchReceipts = (userID) => {
     const [receipts, setReceipts] = useState([]);

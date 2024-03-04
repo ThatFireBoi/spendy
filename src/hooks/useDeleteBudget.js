@@ -1,7 +1,7 @@
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../config/firebase-config";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const useDeleteBudget = () => {
   const deleteBudget = async (budgetID) => {

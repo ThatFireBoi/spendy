@@ -68,8 +68,9 @@ export const ExpenseTracker = () => {
         setTheme(checked ? "dark" : "light");
     };
 
+    // Colors for income and categories
     const categoryColors = {
-        'Income': 'rgba(75, 192, 192, 0.2)', // Colors for income and categories
+        'Income': 'rgba(75, 192, 192, 0.2)',
         'Food': 'rgba(255, 99, 132, 0.2)',
         'Clothing': 'rgba(54, 162, 235, 0.2)',
         'Entertainment': 'rgba(255, 206, 86, 0.2)',
@@ -79,7 +80,7 @@ export const ExpenseTracker = () => {
 };
 
 
-    // Initialized income to always include it in the chart
+    // Initialized income
     const aggregatedData = {
         'Income': 0,
 };

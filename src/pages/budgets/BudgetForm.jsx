@@ -15,12 +15,12 @@ export const BudgetForm = () => {
     await addBudget({
       name,
       targetAmount: parseFloat(targetAmount),
-      currentAmount: 0, // Starting point for the budget
+      currentAmount: 0, // Budget starts at 0
       startDate,
       endDate,
       userID,
     });
-    // Reset form (optional)
+    // Reset
     setName('');
     setTargetAmount('');
     setStartDate('');

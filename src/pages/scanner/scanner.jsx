@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { db } from '../../config/firebase-config';
-import { collection, addDoc, query, where, getDocs, deleteDoc } from 'firebase/firestore';
-import { storage } from '../../config/firebase-config';
-import { useFetchReceipts } from '../../hooks/useFetchReceipts';
-import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
-import React from 'react';
-import './scanner.css';
+import { useState } from "react";
+import { db } from "../../config/firebase-config";
+import { collection, addDoc, query, where, getDocs, deleteDoc } from "firebase/firestore";
+import { storage } from "../../config/firebase-config";
+import { useFetchReceipts } from "../../hooks/useFetchReceipts";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+import React from "react";
+import "./scanner.css";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 
@@ -39,6 +39,7 @@ export const Scanner = ({ userID }) => {
     triggerRefetch();
   };
 
+  // Delete the image from the database, storage, and local storage
   const deleteImage = async (imageUrl) => {
     const imageQuery = query(collection(db, 'receipts'), where('imageUrl', '==', imageUrl));
     const querySnapshot = await getDocs(imageQuery);
@@ -52,7 +53,7 @@ export const Scanner = ({ userID }) => {
     triggerRefetch();
   };
 
-  // Overlay close
+  // Close the overlay when the uiser clicks outside of the image
   const closeOverlay = () => setSelectedImageUrl('');
 
   return (

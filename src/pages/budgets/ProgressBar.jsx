@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export const ProgressBar = ({ currentAmount, targetAmount }) => {
     const progress = Math.min((currentAmount / targetAmount) * 100, 100); // Calculate progress percentage, capped at 100%
