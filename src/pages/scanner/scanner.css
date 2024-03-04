@@ -15,3 +15,7 @@
     max-width: 500px;
     max-height: 500px;
 }
+
+body {
+    font-family: 'Inter', sans-serif;
+}

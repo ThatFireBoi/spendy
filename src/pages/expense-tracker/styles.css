@@ -384,3 +384,7 @@ h4 {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
+
+body {
+  font-family: 'Inter', sans-serif;
+}
