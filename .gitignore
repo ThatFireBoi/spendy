@@ -4,6 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
+/server/node_modules
+/server/index.js
+/server/spendy-415019-320f965b8139.json
 
 # testing
 /coverage
@@ -21,3 +24,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+server/index.js

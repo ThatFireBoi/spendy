@@ -309,6 +309,19 @@ h4 {
   color: #141111;
 }
 
+.scanner-section {
+  width: 420px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(30px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: rgb(56, 54, 54);
+  border-radius: 10px;
+  padding: 30px 100px;
+  margin-bottom: 2rem;
+  color: #141111;
+}
+
 .budget-item {
   margin-bottom: 1rem;
   display: flex;
@@ -344,13 +357,34 @@ h4 {
 }
 
 .expense-tracker-container.light .budget-section,
-.expense-tracker-container.light .budget-item {
+.expense-tracker-container.light .budget-item,
+.expense-tracker-container.light .scanner-section {
   background-color: #f5f5f5;
   color: #2d3436;
 }
 
 .expense-tracker-container.dark .budget-section,
-.expense-tracker-container.dark .budget-item {
+.expense-tracker-container.dark .budget-item,
+.expense-tracker-container.dark .scanner-section {
   background-color: #2b2b2b;
   color: white;
+}
+
+.download-csv-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
 }
