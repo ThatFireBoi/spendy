@@ -216,9 +216,10 @@ export const ExpenseTracker = () => {
         <h2> Transactions</h2>
         <ul>
             {transactions.map((transaction) => {
-                const { id, description, transactionAmount, transactionType } = transaction;
+                const { id, description, transactionAmount, transactionType, category } = transaction;
                 return ( <li key={id} className="transaction-item"> <h4> {description} </h4><p> ${transactionAmount} × <label style={{color: transactionType === "expense" ? "#FF6384" : "#36A2EB"}}> 
-                {transactionType} </label></p><IconButton onClick={() => deleteTransaction(id)} aria-label="delete" style={{ color: 'red'}}><DeleteIcon /></IconButton></li>
+                {transactionType} </label></p><p style={{ fontSize: 'smaller', fontStyle: 'italic' }}> {category}</p>
+                <IconButton onClick={() => deleteTransaction(id)} aria-label="delete" style={{ color: 'red'}}><DeleteIcon /></IconButton></li>
                 );
             })}
         </ul>
