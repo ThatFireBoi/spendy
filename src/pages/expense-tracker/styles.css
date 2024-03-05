@@ -196,7 +196,6 @@
   color: #141111;
   border-radius: 10px;
   padding: 20px 90px;
-  background-image: linear-gradient(to bottom, white, rgb(189, 187, 187));
 }
 
 .transactions h3 {
@@ -310,7 +309,6 @@ h4 {
   border-radius: 10px;
   padding: 20px 90px;
   color: #141111;
-  background-image: linear-gradient(to bottom, white, rgb(189, 187, 187));
 }
 
 .scanner-section {
@@ -323,7 +321,6 @@ h4 {
   border-radius: 10px;
   padding: 20px 90px;
   color: #141111;
-  background-image: linear-gradient(to bottom, white, rgb(189, 187, 187));
 }
 
 .budget-item {
