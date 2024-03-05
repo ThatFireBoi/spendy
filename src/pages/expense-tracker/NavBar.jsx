@@ -1,7 +1,7 @@
 import React from "react";
 // NavBar icons, material-ui
-import HomeIcon from "@material-ui/icons/Home";
-import InfoIcon from "@material-ui/icons/Info";
+import PaidIcon from '@mui/icons-material/Paid';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import "./NavBar.css";
 import logo from "./spendyLogo.png";
@@ -13,8 +13,8 @@ export const NavBar = () => {
         <nav className="nav-bar">
             <img src={logo} alt="logo" className="nav-logo"/>
             <ul>
-                <li><HomeIcon /><a href="/expense-tracker">Transactions</a></li>
-                <li><InfoIcon /><Link to="/expense-tracker">Receipts</Link></li>
+                <li><PaidIcon /><a href="/expense-tracker">Transactions</a></li>
+                <li><ReceiptIcon /><Link to="/expense-tracker">Receipts</Link></li>
                 <li><EmojiEventsIcon /><a href="/expense-tracker">Achievements</a></li>
             </ul>
         </nav>
