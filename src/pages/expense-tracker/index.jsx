@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
@@ -13,7 +13,8 @@ import { useGetBudgets } from "../../hooks/useGetBudgets";
 import { BudgetForm } from "../budgets/BudgetForm";
 import { BudgetList } from "../budgets/BudgetList";
 import { Scanner } from "../scanner/scanner";
-import { auth } from "../../config/firebase-config";
+import { auth, db } from "../../config/firebase-config";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import "./styles.css";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +22,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Doughnut } from "react-chartjs-2";
+import { ProgressBar } from "../budgets/ProgressBar";
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
 
@@ -63,6 +65,27 @@ export const ExpenseTracker = () => {
     const expenseCategories = ['Food', 'Clothing', 'Entertainment', 'Home', 'Utilities', 'Other'];
     const [expenseCategory, setExpenseCategory] = useState(expenseCategories[0]);
 
+    useEffect(() => {
+        const achievementDocRef = doc(db, "achievements", userID);
+
+        getDoc(achievementDocRef).then((docSnap) => {
+            if (docSnap.exists()) {
+                const achievementData = docSnap.data();
+                
+                if (transactions.length >= 10 && !achievementData.transactionCount) {
+                    toast.success('Achievement Unlocked: Submitted 10 Transactions!');
+                    updateDoc(achievementDocRef, { transactionCount: true });
+                }
+
+                if (budgets.length > 0 && !achievementData.budgetSet) {
+                    toast.success('Achievement Unlocked: Set a Budget!');
+                    updateDoc(achievementDocRef, { budgetSet: true });
+                }
+            } else {
+                setDoc(achievementDocRef, { transactionCount: false, budgetSet: false });
+            }
+        });
+    }, [transactions, budgets, userID]);
 
     const handleThemeChange = (checked) => {
         setTheme(checked ? "dark" : "light");
@@ -216,10 +239,11 @@ export const ExpenseTracker = () => {
         <h2> Transactions</h2>
         <ul>
             {transactions.map((transaction) => {
-                const { id, description, transactionAmount, transactionType } = transaction;
-                return <li key={id}> <h4> {description} </h4><p> ${transactionAmount} × <label style={{color: transactionType === "expense" ? "#FF6384" : "#36A2EB"}}> 
-                {transactionType} </label></p><IconButton onClick={() => deleteTransaction(id)} aria-label="delete" style={{ color: 'red'}}><DeleteIcon /></IconButton></li>
-            
+                const { id, description, transactionAmount, transactionType, category } = transaction;
+                return ( <li key={id} className="transaction-item"> <h4> {description} </h4><p> ${transactionAmount} × <label style={{color: transactionType === "expense" ? "#FF6384" : "#36A2EB"}}> 
+                {transactionType} </label></p><p style={{ fontSize: 'smaller', fontStyle: 'italic' }}> {category}</p>
+                <IconButton onClick={() => deleteTransaction(id)} aria-label="delete" style={{ color: 'red'}}><DeleteIcon /></IconButton></li>
+                );
             })}
         </ul>
         <div className="donut-graph-section">
@@ -235,6 +259,17 @@ export const ExpenseTracker = () => {
             <h2>Upload Receipts</h2>
             <Scanner userID={userID} />
         </div>
+        <div className="achievement-section">
+                        <h2>Achievements</h2>
+                        <div>
+                            <p>Submit 10 Transactions</p>
+                            <ProgressBar currentAmount={transactions.length} targetAmount={10} />
+                        </div>
+                        <div>
+                            <p>Set a Budget</p>
+                            <ProgressBar currentAmount={budgets.length ? 1 : 0} targetAmount={1} />
+                        </div>
+                    </div>
         </div>
         </>
     );

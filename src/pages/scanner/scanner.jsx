@@ -62,18 +62,20 @@ export const Scanner = ({ userID }) => {
       <input type="file" onChange={(e) => setFileToUpload(e.target.files[0])} />
       <button onClick={uploadImage} disabled={!fileToUpload}>Upload Image</button>
 
-      <div>
+      <div className="grid-gallery">
         {receipts.map((url, index) => (
-          <div key={index}>
+          <div key={index} className="gallery-item">
             <img 
               src={url} 
               alt={`Uploaded Receipt ${index + 1}`} 
               style={thumbnailStyle} 
               onClick={() => setSelectedImageUrl(url)}
             />
+            <div className="delete-btn">
             <IconButton onClick={() => deleteImage(url)} aria-label="delete" style={{ color: 'red'}}>
               <DeleteIcon />
             </IconButton>
+            </div>
           </div>
         ))}
       </div>
