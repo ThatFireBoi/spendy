@@ -8,6 +8,7 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
 .nav-bar li {

@@ -13,9 +13,9 @@ export const NavBar = () => {
         <nav className="nav-bar">
             <img src={logo} alt="logo" className="nav-logo"/>
             <ul>
-                <li><HomeIcon /><a href="/">Transactions</a></li>
-                <li><InfoIcon /><Link to="/scanner">Scanner</Link></li>
-                <li><EmojiEventsIcon /><a href="/">Achievements</a></li>
+                <li><HomeIcon /><a href="/expense-tracker">Transactions</a></li>
+                <li><InfoIcon /><Link to="/expense-tracker">Receipts</Link></li>
+                <li><EmojiEventsIcon /><a href="/expense-tracker">Achievements</a></li>
             </ul>
         </nav>
     );

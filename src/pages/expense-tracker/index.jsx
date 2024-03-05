@@ -13,7 +13,8 @@ import { useGetBudgets } from "../../hooks/useGetBudgets";
 import { BudgetForm } from "../budgets/BudgetForm";
 import { BudgetList } from "../budgets/BudgetList";
 import { Scanner } from "../scanner/scanner";
-import { auth } from "../../config/firebase-config";
+import { auth, db } from "../../config/firebase-config";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import "./styles.css";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -63,18 +64,28 @@ export const ExpenseTracker = () => {
     const [theme, setTheme] = useState("light");
     const expenseCategories = ['Food', 'Clothing', 'Entertainment', 'Home', 'Utilities', 'Other'];
     const [expenseCategory, setExpenseCategory] = useState(expenseCategories[0]);
-    const [budgetAchievementCompleted, setBudgetAchievementCompleted] = useState(false);
 
     useEffect(() => {
-        if (transactions.length >= 10) {
-            toast.success('Achievement Unlocked: Submitted 10 Transactions!');
-        }
+        const achievementDocRef = doc(db, "achievements", userID);
 
-        if (budgets.length > 0 && !budgetAchievementCompleted) {
-            toast.success('Achievement Unlocked: Set a Budget!');
-            setBudgetAchievementCompleted(true);
-        }
-    }, [transactions, budgets, budgetAchievementCompleted]);
+        getDoc(achievementDocRef).then((docSnap) => {
+            if (docSnap.exists()) {
+                const achievementData = docSnap.data();
+                
+                if (transactions.length >= 10 && !achievementData.transactionCount) {
+                    toast.success('Achievement Unlocked: Submitted 10 Transactions!');
+                    updateDoc(achievementDocRef, { transactionCount: true });
+                }
+
+                if (budgets.length > 0 && !achievementData.budgetSet) {
+                    toast.success('Achievement Unlocked: Set a Budget!');
+                    updateDoc(achievementDocRef, { budgetSet: true });
+                }
+            } else {
+                setDoc(achievementDocRef, { transactionCount: false, budgetSet: false });
+            }
+        });
+    }, [transactions, budgets, userID]);
 
     const handleThemeChange = (checked) => {
         setTheme(checked ? "dark" : "light");

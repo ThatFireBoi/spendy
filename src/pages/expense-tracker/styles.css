@@ -17,7 +17,7 @@
 }
 
 .expense-tracker-container {
-  display: grid;
+  display: inline-flex;
   grid-template-columns: repeat(12, 1fr);
   grid-gap: 1rem;
   /*justify-content: space-between;*/
@@ -33,7 +33,7 @@
   );*/
   background-image: linear-gradient(0deg, transparent 24%, rgba(0, 0, 0, 0.05) 25%, rgba(0, 0, 0, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05) 76%, transparent 77%, transparent), 
                    linear-gradient(90deg, transparent 24%, rgba(0, 0, 0, 0.05) 25%, rgba(0, 0, 0, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05) 76%, transparent 77%, transparent);
-  background-size: 50px 50px;
+  background-size: 40px 40px;
 }
 
 .expense-tracker-container.light {
