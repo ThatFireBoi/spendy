@@ -311,6 +311,18 @@ h4 {
   color: #141111;
 }
 
+.achievement-section {
+  width: 420px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(30px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: rgb(56, 54, 54);
+  border-radius: 10px;
+  padding: 20px 90px;
+  color: #141111;
+}
+
 .scanner-section {
   width: 420px;
   background: transparent;
@@ -359,14 +371,16 @@ h4 {
 
 .expense-tracker-container.light .budget-section,
 .expense-tracker-container.light .budget-item,
-.expense-tracker-container.light .scanner-section {
+.expense-tracker-container.light .scanner-section,
+.expense-tracker-container.light .achievement-section {
   background-color: #f5f5f5;
   color: #2d3436;
 }
 
 .expense-tracker-container.dark .budget-section,
 .expense-tracker-container.dark .budget-item,
-.expense-tracker-container.dark .scanner-section {
+.expense-tracker-container.dark .scanner-section,
+.expense-tracker-container.dark .achievement-section {
   background-color: #2b2b2b;
   color: white;
 }

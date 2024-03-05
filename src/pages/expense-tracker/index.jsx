@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
@@ -21,6 +21,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Doughnut } from "react-chartjs-2";
+import { ProgressBar } from "../budgets/ProgressBar";
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
 
@@ -62,7 +63,18 @@ export const ExpenseTracker = () => {
     const [theme, setTheme] = useState("light");
     const expenseCategories = ['Food', 'Clothing', 'Entertainment', 'Home', 'Utilities', 'Other'];
     const [expenseCategory, setExpenseCategory] = useState(expenseCategories[0]);
+    const [budgetAchievementCompleted, setBudgetAchievementCompleted] = useState(false);
 
+    useEffect(() => {
+        if (transactions.length >= 10) {
+            toast.success('Achievement Unlocked: Submitted 10 Transactions!');
+        }
+
+        if (budgets.length > 0 && !budgetAchievementCompleted) {
+            toast.success('Achievement Unlocked: Set a Budget!');
+            setBudgetAchievementCompleted(true);
+        }
+    }, [transactions, budgets, budgetAchievementCompleted]);
 
     const handleThemeChange = (checked) => {
         setTheme(checked ? "dark" : "light");
@@ -236,6 +248,17 @@ export const ExpenseTracker = () => {
             <h2>Upload Receipts</h2>
             <Scanner userID={userID} />
         </div>
+        <div className="achievement-section">
+                        <h2>Achievements</h2>
+                        <div>
+                            <p>Submit 10 Transactions</p>
+                            <ProgressBar currentAmount={transactions.length} targetAmount={10} />
+                        </div>
+                        <div>
+                            <p>Set a Budget</p>
+                            <ProgressBar currentAmount={budgets.length ? 1 : 0} targetAmount={1} />
+                        </div>
+                    </div>
         </div>
         </>
     );
