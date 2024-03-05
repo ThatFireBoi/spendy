@@ -31,6 +31,9 @@
     rgb(240, 243, 241) 0%,
     rgb(127, 129, 127) 100%
   );*/
+  background-image: linear-gradient(0deg, transparent 24%, rgba(0, 0, 0, 0.05) 25%, rgba(0, 0, 0, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05) 76%, transparent 77%, transparent), 
+                   linear-gradient(90deg, transparent 24%, rgba(0, 0, 0, 0.05) 25%, rgba(0, 0, 0, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
 }
 
 .expense-tracker-container.light {
@@ -193,6 +196,7 @@
   color: #141111;
   border-radius: 10px;
   padding: 20px 90px;
+  background-image: linear-gradient(to bottom, white, rgb(189, 187, 187));
 }
 
 .transactions h3 {
@@ -304,9 +308,9 @@ h4 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background-color: rgb(56, 54, 54);
   border-radius: 10px;
-  padding: 30px 100px;
-  margin-bottom: 2rem;
+  padding: 20px 90px;
   color: #141111;
+  background-image: linear-gradient(to bottom, white, rgb(189, 187, 187));
 }
 
 .scanner-section {
@@ -317,9 +321,9 @@ h4 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background-color: rgb(56, 54, 54);
   border-radius: 10px;
-  padding: 30px 100px;
-  margin-bottom: 2rem;
+  padding: 20px 90px;
   color: #141111;
+  background-image: linear-gradient(to bottom, white, rgb(189, 187, 187));
 }
 
 .budget-item {
@@ -387,4 +391,22 @@ h4 {
 
 body {
   font-family: 'Inter', sans-serif;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.transaction-item {
+  animation: fadeIn 2s;
+}
+
+.budget-item {
+  animation: fadeIn 2s;
 }

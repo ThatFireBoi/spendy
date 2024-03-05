@@ -217,9 +217,9 @@ export const ExpenseTracker = () => {
         <ul>
             {transactions.map((transaction) => {
                 const { id, description, transactionAmount, transactionType } = transaction;
-                return <li key={id}> <h4> {description} </h4><p> ${transactionAmount} × <label style={{color: transactionType === "expense" ? "#FF6384" : "#36A2EB"}}> 
+                return ( <li key={id} className="transaction-item"> <h4> {description} </h4><p> ${transactionAmount} × <label style={{color: transactionType === "expense" ? "#FF6384" : "#36A2EB"}}> 
                 {transactionType} </label></p><IconButton onClick={() => deleteTransaction(id)} aria-label="delete" style={{ color: 'red'}}><DeleteIcon /></IconButton></li>
-            
+                );
             })}
         </ul>
         <div className="donut-graph-section">
