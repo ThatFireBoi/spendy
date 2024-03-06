@@ -166,7 +166,7 @@ export const ExpenseTracker = () => {
             <NavBar />
             <div className="theme-switch-wrapper">
                 <label htmlFor="theme-switch" className="theme-switch">
-                    {theme === 'light' ? <FaSun color="#f39c12" size="1.5em" /> : <FaMoon color="#f39c12" size="1.5em" />}
+                    {theme === 'light' ? <FaSun color="#f39c12" size="1.5em" /> : <FaMoon color="white" size="1.5em" />}
                 </label>
             <Switch
                 checked={theme === 'dark'}
