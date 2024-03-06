@@ -24,7 +24,8 @@ export const Auth = () => {
             <button className="login-with-google-account-btn" onClick={signInWithGoogle}> 
                 {" "}
                 Sign In
-            </button> 
+            </button>
+            <div class="mouse"></div> 
         </div>
     );
 };
