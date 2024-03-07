@@ -16,7 +16,7 @@ app.use(express.json());
 // Function to obtain Google OAuth2 client
 const getGoogleAuthClient = () => {
   const auth = new google.auth.GoogleAuth({
-    keyFilename: "./spendy-415019-320f965b8139.json", // Path to your Google Service Account Key File
+    keyFilename: "./spendy-415019-320f965b8139.json", // Path to Google Service Account Key File
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
   });
 
@@ -40,7 +40,7 @@ app.post('/api/parse-receipt', upload.single('receipt'), async (req, res) => {
       {
         document: {
           content: fileContent,
-          mimeType: 'application/pdf', // adjust this according to your file type
+          mimeType: 'application/pdf',
         },
       },
       {
@@ -53,7 +53,7 @@ app.post('/api/parse-receipt', upload.single('receipt'), async (req, res) => {
 
     fs.unlinkSync(filePath); // Clean up the temporary file
 
-    // Parse the response from Document AI and send the relevant data back to the client
+    // Parse the response from Document AI and send the relevant data back
     const parsedData = response.data;
     res.json(parsedData);
   } catch (error) {

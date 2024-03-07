@@ -20,7 +20,7 @@ export const BudgetForm = () => {
       endDate,
       userID,
     });
-    // Reset
+    
     setName('');
     setTargetAmount('');
     setStartDate('');
