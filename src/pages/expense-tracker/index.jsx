@@ -152,8 +152,10 @@ export const ExpenseTracker = () => {
             budgetID: selectedBudgetID
         });
         setDescription("");
-        setTransactionAmount("");
-        setSelectedBudgetID(null);
+        setTransactionAmount(0);
+        setTransactionType("expense");
+        setExpenseCategory(expenseCategories[0]);
+        setSelectedBudgetID("");
         toast.success("Transaction Added Successfully");
     };
 
