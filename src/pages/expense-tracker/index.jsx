@@ -28,18 +28,23 @@ import { ProgressBar } from "../budgets/ProgressBar";
 import Chart from "chart.js/auto";
 
 function convertToCSV(data) {
+    if (!data || !data.length) {
+        return '';
+    }
+
     const csvRows = [];
     const headers = Object.keys(data[0]);
     csvRows.push(headers.join(','));
 
     for (const row of data) {
         const values = headers.map(header => {
-        const escaped = ('' + row[header]).replace(/"/g, '\\"');
-        return `"${escaped}"`;
-    });
-    csvRows.push(values.join(','));
+            const cellValue = row[header] ?? '';
+            const escaped = String(cellValue).replace(/"/g, '\\"');
+            return `"${escaped}"`;
+        });
+        csvRows.push(values.join(','));
     }
-        return csvRows.join('\n');
+    return csvRows.join('\n');
 }
 
 function downloadCSV(data) {
