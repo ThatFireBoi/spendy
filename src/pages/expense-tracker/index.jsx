@@ -23,6 +23,7 @@ import { IconButton } from "@material-ui/core";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Doughnut } from "react-chartjs-2";
 import { ProgressBar } from "../budgets/ProgressBar";
+import { isBudgetSetWithinFirstFiveDays} from "../budgets/BudgetList"
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
 
@@ -268,6 +269,10 @@ export const ExpenseTracker = () => {
                         <div>
                             <p>Set a Budget</p>
                             <ProgressBar currentAmount={budgets.length ? 1 : 0} targetAmount={1} />
+                        </div>
+                        <div>
+                            <p>Early Bird Budget</p>
+                            <ProgressBar currentAmount={isBudgetSetWithinFirstFiveDays() ? 1 : 0} targetAmount={1} />
                         </div>
                     </div>
         </div>
