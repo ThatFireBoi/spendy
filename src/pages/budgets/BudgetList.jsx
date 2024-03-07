@@ -5,6 +5,7 @@ import { ProgressBar } from "./ProgressBar";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 
+
 export function isBudgetSetWithinFirstFiveDays(budgets) {
   const currentDate = new Date();
   const currentDayOfMonth = currentDate.getDate();
@@ -18,6 +19,8 @@ export const BudgetList = ({ userID, onBudgetSet }) => {
   const handleDeleteBudget = async (budgetID) => {
       await deleteBudget(budgetID);
   };
+
+  const completedBudgets = budgets.filter(budget => budget.isCompleted);
 
   return (
     <div className="budget-list">
@@ -39,6 +42,25 @@ export const BudgetList = ({ userID, onBudgetSet }) => {
           ) : (
             <p>No budgets found.</p>
           )}
+      {/*Rendering complete Budgets */}
+      {completedBudgets.length > 0 && (
+        <div>
+          <h3>Completed Budgets</h3>
+          <ul>
+            {completedBudgets.map((budget) => (
+              <li key={budget.id} className="budget-item">
+                <p><b>{budget.name}|</b></p>
+                <p><u>Target Amount</u>: ${budget.targetAmount}</p>
+                <p><u>Current Amount</u>: ${budget.currentAmount}</p>
+                <ProgressBar currentAmount={budget.currentAmount} targetAmount={budget.targetAmount} />
+                <IconButton onClick={() => handleDeleteBudget(budget.id)} aria-label="delete" style={{ color: 'red'}}>
+                  <DeleteIcon />
+                </IconButton>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

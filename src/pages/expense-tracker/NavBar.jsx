@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // Remove unused import {ComponentName} from '@material-tailwind/react';
 
 // Remove unused imports
@@ -8,7 +9,6 @@ import React from "react";
 import "./NavBar.css";
 
 import logo from "./spendyLogo.png";
-import { Link } from "react-router-dom";
 
 import {
     Card,

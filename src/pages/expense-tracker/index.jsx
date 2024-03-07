@@ -19,6 +19,7 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import "./styles.css";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 import { FaMoon, FaSun } from "react-icons/fa";
@@ -27,6 +28,7 @@ import { ProgressBar } from "../budgets/ProgressBar";
 import { isBudgetSetWithinFirstFiveDays} from "../budgets/BudgetList"
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
+
 
 function convertToCSV(data) {
     if (!data || !data.length) {
@@ -66,6 +68,7 @@ export const ExpenseTracker = () => {
     const { transactions, transactionTotals } = useGetTransactions();
     const { userName, profilePicture, userID } = useGetUserInfo();
     const budgets = useGetBudgets(userID);
+    const completedBudgets = budgets.filter(budget => budget.isCompleted);
     const [selectedBudgetID, setSelectedBudgetID] = useState("");
     const navigate = useNavigate();
     const [theme, setTheme] = useState("light");
@@ -259,7 +262,7 @@ export const ExpenseTracker = () => {
         </div>
         </div>
         <div className="budget-section">
-                    <h2>Manage Your Budgets</h2>
+                    <h2>Savings Goals</h2>
                     <BudgetForm userID={userID} />
                     <BudgetList userID={userID} />
                 </div>
