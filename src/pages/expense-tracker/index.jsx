@@ -279,7 +279,7 @@ export const ExpenseTracker = () => {
                         </div>
                         <div>
                             <p>Early Bird Budget</p>
-                            <ProgressBar currentAmount={isBudgetSetWithinFirstFiveDays() ? 1 : 0} targetAmount={1} />
+                            <ProgressBar currentAmount={isBudgetSetWithinFirstFiveDays(budgets) ? 1 : 0} targetAmount={1} />
                         </div>
                     </div>
         </div>

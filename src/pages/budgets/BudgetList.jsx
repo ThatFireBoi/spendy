@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGetBudgets } from "../../hooks/useGetBudgets";
 import { useDeleteBudget } from "../../hooks/useDeleteBudget";
 import { ProgressBar } from "./ProgressBar";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 
-// Checks if the budget is set within the first five days of the month
-export function isBudgetSetWithinFirstFiveDays() {
+export function isBudgetSetWithinFirstFiveDays(budgets) {
   const currentDate = new Date();
   const currentDayOfMonth = currentDate.getDate();
-  return currentDayOfMonth <= 5;
+  return currentDayOfMonth <= 5 && budgets.length > 0;
 }
 
-export const BudgetList = ({ userID }) => {
+export const BudgetList = ({ userID, onBudgetSet }) => {
   const budgets = useGetBudgets(userID);
   const { deleteBudget } = useDeleteBudget();
 
