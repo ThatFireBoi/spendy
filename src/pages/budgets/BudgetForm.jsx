@@ -22,7 +22,7 @@ export const BudgetForm = () => {
       userID,
     });
 
-    //Sets budget et to true once budget is added
+    //Sets budget the to true once budget is added
     setBudgetSet(true);
 
     setName('');
