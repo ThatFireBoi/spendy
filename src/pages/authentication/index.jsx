@@ -20,11 +20,12 @@ export const Auth = () => {
     };
     return (
         <div className="user-login-page">
-            <h3 style={{ fontSize: "100px" }}>Welcome to Spendy!</h3>
+            <h3 style={{ fontSize: "100px" }}>Welcome to <span class="fancy">Spendy</span></h3>
             <button className="login-with-google-account-btn" onClick={signInWithGoogle}> 
                 {" "}
                 Sign In
-            </button> 
+            </button>
+            <div class="mouse"></div> 
         </div>
     );
 };

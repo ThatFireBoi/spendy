@@ -3,7 +3,8 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 import "./NavBar.css";
-import { NavBar } from "./NavBar"
+import { NavBar } from "./NavBar";
+import { DigitalClock } from "./DigitalClock";
 import Switch from "react-switch";
 import { useAddTransaction } from "../../hooks/useAddTransaction";
 import { useGetTransactions } from "../../hooks/useGetTransactions";
@@ -28,18 +29,23 @@ import { isBudgetSetWithinFirstFiveDays} from "../budgets/BudgetList"
 import Chart from "chart.js/auto";
 
 function convertToCSV(data) {
+    if (!data || !data.length) {
+        return '';
+    }
+
     const csvRows = [];
     const headers = Object.keys(data[0]);
     csvRows.push(headers.join(','));
 
     for (const row of data) {
         const values = headers.map(header => {
-        const escaped = ('' + row[header]).replace(/"/g, '\\"');
-        return `"${escaped}"`;
-    });
-    csvRows.push(values.join(','));
+            const cellValue = row[header] ?? '';
+            const escaped = String(cellValue).replace(/"/g, '\\"');
+            return `"${escaped}"`;
+        });
+        csvRows.push(values.join(','));
     }
-        return csvRows.join('\n');
+    return csvRows.join('\n');
 }
 
 function downloadCSV(data) {
@@ -167,7 +173,7 @@ export const ExpenseTracker = () => {
             <NavBar />
             <div className="theme-switch-wrapper">
                 <label htmlFor="theme-switch" className="theme-switch">
-                    {theme === 'light' ? <FaSun color="#f39c12" size="1.5em" /> : <FaMoon color="#f39c12" size="1.5em" />}
+                    {theme === 'light' ? <FaSun color="#f39c12" size="1.5em" /> : <FaMoon color="white" size="1.5em" />}
                 </label>
             <Switch
                 checked={theme === 'dark'}
@@ -185,6 +191,7 @@ export const ExpenseTracker = () => {
             <script src="https://mediafiles.botpress.cloud/60455ef1-33d9-4a61-b615-2cd02ecc452b/webchat/config.js" defer></script></body>
             <ToastContainer />
             <div className="container">
+                <DigitalClock />
                 {profilePicture && <div className="profile"> <img className="profile-picture" src={profilePicture} alt="" /> <button className="sign-out-btn" onClick={signUserOut}> Sign Out</button></div>}
                 <h1> {userName}'s Spendy Tracker</h1>
                 <div className="balance">

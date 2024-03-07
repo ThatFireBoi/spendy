@@ -10,7 +10,7 @@ export const useAddTransaction = () => {
       transactionAmount,
       transactionType,
       category,
-      budgetID = "" // Defaults to an empty string
+      budgetID = "" // Empty string as default value
     }) => {
       const amountNumber = parseFloat(transactionAmount);
       await addDoc(transactionCollectionRef, {
