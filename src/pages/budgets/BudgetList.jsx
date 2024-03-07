@@ -18,21 +18,24 @@ export const BudgetList = ({ userID }) => {
       <h2>Budgets</h2>
       {budgets.length > 0 ? (
         <ul>
-              {budgets.map((budget) => (
-                <li key={budget.id} className="budget-item">
-                  <p><b>{budget.name}|</b></p>
-                  <p><u>Target Amount</u>: ${budget.targetAmount}</p>
-                  <p><u>Current Amount</u>: ${budget.currentAmount}</p>
-                  <ProgressBar currentAmount={budget.currentAmount} targetAmount={budget.targetAmount} />
-                  <IconButton onClick={() => handleDeleteBudget(budget.id)} aria-label="delete" style={{ color: 'red'}}>
-                    <DeleteIcon />
-                  </IconButton>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No budgets found.</p>
-          )}
+          {budgets.map((budget) => (
+            <li key={budget.id} className="budget-item">
+              <p><b>{budget.name}</b></p>
+              <p><u><b>Target Amount</b></u> ${budget.targetAmount} <u><b>Current Amount</b></u> ${budget.currentAmount}</p>
+              <div>
+                <p><u><b>Start Date</b></u> {budget.startDate}</p>
+                <p><u><b>End Date</b></u> {budget.endDate}</p>
+              </div>
+              <ProgressBar currentAmount={budget.currentAmount} targetAmount={budget.targetAmount} />
+              <IconButton onClick={() => handleDeleteBudget(budget.id)} aria-label="delete" style={{ color: 'red'}}>
+                <DeleteIcon />
+              </IconButton>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No budgets found.</p>
+      )}
     </div>
   );
 };
