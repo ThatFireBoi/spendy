@@ -8,6 +8,7 @@ export const BudgetForm = () => {
   const [targetAmount, setTargetAmount] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [budgetSet, setBudgetSet] = useState(false) //Check is budget has been set
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +21,10 @@ export const BudgetForm = () => {
       endDate,
       userID,
     });
-    
+
+    //Sets budget et to true once budget is added
+    setBudgetSet(true);
+        
     setName('');
     setTargetAmount('');
     setStartDate('');
