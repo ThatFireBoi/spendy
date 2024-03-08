@@ -24,6 +24,7 @@ import { IconButton } from "@material-ui/core";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Doughnut } from "react-chartjs-2";
 import { ProgressBar } from "../budgets/ProgressBar";
+import { Chatbot } from "../scanner/Chatbot";
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
 
@@ -202,8 +203,6 @@ export const ExpenseTracker = () => {
         </div>
         <div className={`expense-tracker-container ${theme}`}>
         <div className="expense-tracker">
-            <body><script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
-            <script src="https://mediafiles.botpress.cloud/60455ef1-33d9-4a61-b615-2cd02ecc452b/webchat/config.js" defer></script></body>
             <ToastContainer />
             <div className="container">
                 <DigitalClock />
@@ -292,6 +291,9 @@ export const ExpenseTracker = () => {
                             <p>Set a Saving's Goal</p>
                             <ProgressBar currentAmount={budgets.length ? 1 : 0} targetAmount={1} />
                         </div>
+                    </div>
+                    <div className="chat-bot">
+                        <Chatbot />
                     </div>
         </div>
         </>
