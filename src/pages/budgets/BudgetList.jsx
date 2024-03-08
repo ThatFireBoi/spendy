@@ -34,7 +34,7 @@ export const BudgetList = ({ userID }) => {
           ))}
         </ul>
       ) : (
-        <p>No savings' goals found.</p>
+        <p>No saving's goal found.</p>
       )}
     </div>
   );
