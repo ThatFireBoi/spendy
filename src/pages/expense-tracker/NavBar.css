@@ -46,3 +46,19 @@
     font-family: 'Inter', sans-serif;
     text-decoration: none;
 }
+
+.nav-bar button {
+    display: block;
+    padding: 8px 24px;
+    margin: 10px auto;
+    font-size: 0.6rem;
+    font-weight: 500;
+    outline: none;
+    text-decoration: none;
+    color: #484b57;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    cursor: pointer;
+}

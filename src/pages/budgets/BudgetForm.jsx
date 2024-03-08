@@ -33,7 +33,7 @@ export const BudgetForm = () => {
       <input type="number" placeholder="Target Amount" value={targetAmount} onChange={(e) => setTargetAmount(e.target.value)} required />
       <input type="date" placeholder="Start Date" value={startDate} onChange={(e) => setStartDate(e.target.value)} required />
       <input type="date" placeholder="End Date" value={endDate} onChange={(e) => setEndDate(e.target.value)} required />
-      <button type="submit">Add Budget</button>
+      <button type="submit">Track Savings</button>
     </form>
   );
 };

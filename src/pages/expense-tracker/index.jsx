@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
@@ -70,6 +70,10 @@ export const ExpenseTracker = () => {
     const [theme, setTheme] = useState("light");
     const expenseCategories = ['Food', 'Clothing', 'Entertainment', 'Home', 'Utilities', 'Other'];
     const [expenseCategory, setExpenseCategory] = useState(expenseCategories[0]);
+    const transactionsRef = useRef(null);
+    const savingsRef = useRef(null);
+    const receiptsRef = useRef(null);
+    const achievementsRef = useRef(null);
 
     useEffect(() => {
         const achievementDocRef = doc(db, "achievements", userID);
@@ -168,10 +172,20 @@ export const ExpenseTracker = () => {
         }
     };
 
+    const handleTransactionsClick = () => transactionsRef.current.scrollIntoView({ behavior: 'smooth' });
+    const handleSavingsClick = () => savingsRef.current.scrollIntoView({ behavior: 'smooth' });
+    const handleReceiptsClick = () => receiptsRef.current.scrollIntoView({ behavior: 'smooth' });
+    const handleAchievementsClick = () => achievementsRef.current.scrollIntoView({ behavior: 'smooth' });
+
     return (
         <>
         <div className="nav-bar">
-            <NavBar />
+            <NavBar
+                onTransactionsClick={handleTransactionsClick}
+                onSavingsClick={handleSavingsClick}
+                onReceiptsClick={handleReceiptsClick}
+                onAchievementsClick={handleAchievementsClick}
+            />
             <div className="theme-switch-wrapper">
                 <label htmlFor="theme-switch" className="theme-switch">
                     {theme === 'light' ? <FaSun color="#f39c12" size="1.5em" /> : <FaMoon color="white" size="1.5em" />}
@@ -244,7 +258,7 @@ export const ExpenseTracker = () => {
             </div>
             {/*{profilePicture && <div className="profile"> <img className="profile-picture" src={profilePicture} alt="" /> <button className="sign-out-btn" onClick={signUserOut}> Sign Out</button></div>}*/}
         </div>
-        <div className="transactions">
+        <div ref={transactionsRef} className="transactions">
         <h2> Transactions</h2>
         <ul>
             {transactions.map((transaction) => {
@@ -259,23 +273,23 @@ export const ExpenseTracker = () => {
             <Doughnut data={chartData} />
         </div>
         </div>
-        <div className="budget-section">
-                    <h2>Manage Your Budgets</h2>
+        <div ref={savingsRef} className="budget-section">
+                    <h2>Manage Your Savings</h2>
                     <BudgetForm userID={userID} />
                     <BudgetList userID={userID} />
                 </div>
-                <div className="scanner-section">
+                <div ref={receiptsRef} className="scanner-section">
             <h2>Upload Receipts</h2>
             <Scanner userID={userID} />
         </div>
-        <div className="achievement-section">
+        <div ref={achievementsRef} className="achievement-section">
                         <h2>Achievements</h2>
                         <div>
                             <p>Submit 10 Transactions</p>
                             <ProgressBar currentAmount={transactions.length} targetAmount={10} />
                         </div>
                         <div>
-                            <p>Set a Budget</p>
+                            <p>Set a Saving's Goal</p>
                             <ProgressBar currentAmount={budgets.length ? 1 : 0} targetAmount={1} />
                         </div>
                     </div>

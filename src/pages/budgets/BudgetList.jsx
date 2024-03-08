@@ -15,7 +15,7 @@ export const BudgetList = ({ userID }) => {
 
   return (
     <div className="budget-list">
-      <h2>Budgets</h2>
+      <h2>Savings</h2>
       {budgets.length > 0 ? (
         <ul>
           {budgets.map((budget) => (
@@ -34,7 +34,7 @@ export const BudgetList = ({ userID }) => {
           ))}
         </ul>
       ) : (
-        <p>No budgets found.</p>
+        <p>No savings' goals found.</p>
       )}
     </div>
   );
