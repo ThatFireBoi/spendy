@@ -68,7 +68,6 @@ export const ExpenseTracker = () => {
     const { transactions, transactionTotals } = useGetTransactions();
     const { userName, profilePicture, userID } = useGetUserInfo();
     const budgets = useGetBudgets(userID);
-    const completedBudgets = budgets.filter(budget => budget.isCompleted);
     const [selectedBudgetID, setSelectedBudgetID] = useState("");
     const navigate = useNavigate();
     const [theme, setTheme] = useState("light");
@@ -264,9 +263,10 @@ export const ExpenseTracker = () => {
         </div>
         </div>
         <div className="budget-section">
-                    <h2>Savings Goals</h2>
+                    <h2>Manage your savings </h2>
                     <BudgetForm userID={userID} />
                     <BudgetList userID={userID} />
+            
                 </div>
                 <div className="scanner-section">
             <h2>Upload Receipts</h2>

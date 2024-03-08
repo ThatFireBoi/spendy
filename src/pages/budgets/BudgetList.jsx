@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useGetBudgets } from "../../hooks/useGetBudgets";
 import { useDeleteBudget } from "../../hooks/useDeleteBudget";
 import { ProgressBar } from "./ProgressBar";
@@ -6,10 +6,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 
 
+
 export function isBudgetSetWithinFirstFiveDays(budgets) {
   const currentDate = new Date();
   const currentDayOfMonth = currentDate.getDate();
-  return currentDayOfMonth <= 5 && budgets.length > 0;
+  return currentDayOfMonth <= 7 && budgets.length > 0;
 }
 
 export const BudgetList = ({ userID, onBudgetSet }) => {
@@ -24,7 +25,7 @@ export const BudgetList = ({ userID, onBudgetSet }) => {
 
   return (
     <div className="budget-list">
-      <h2>Budgets</h2>
+      <h2>Savings Goals</h2>
       {budgets.length > 0 ? (
         <ul>
           {budgets.map((budget) => (
