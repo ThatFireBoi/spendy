@@ -63,7 +63,7 @@ function downloadCSV(data) {
 export const ExpenseTracker = () => {
     const { addTransaction } = useAddTransaction();
     const { deleteTransaction } = useDeleteTransaction();
-    const { transactions, transactionTotals } = useGetTransactions();
+    const { transactions } = useGetTransactions();
     const { userName, profilePicture, userID } = useGetUserInfo();
     const budgets = useGetBudgets(userID);
     const [selectedBudgetID, setSelectedBudgetID] = useState("");
@@ -75,6 +75,20 @@ export const ExpenseTracker = () => {
     const savingsRef = useRef(null);
     const receiptsRef = useRef(null);
     const achievementsRef = useRef(null);
+
+    let updatedBalance = 0;
+    let updatedIncome = 0;
+    let updatedExpenses = 0;
+
+    transactions.forEach(transaction => {
+        if (transaction.transactionType === 'income' && !transaction.excludeFromBalance) {
+            updatedIncome += parseFloat(transaction.transactionAmount);
+            updatedBalance += parseFloat(transaction.transactionAmount);
+        } else if (transaction.transactionType === 'expense') {
+            updatedExpenses += parseFloat(transaction.transactionAmount);
+            updatedBalance -= parseFloat(transaction.transactionAmount);
+        }
+    });
 
     useEffect(() => {
         const achievementDocRef = doc(db, "achievements", userID);
@@ -144,7 +158,6 @@ export const ExpenseTracker = () => {
     const [description, setDescription] = useState("");
     const [transactionAmount, setTransactionAmount] = useState(0);
     const [transactionType, setTransactionType] = useState("expense");
-    const { balance, income, expenses } = transactionTotals;
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -211,16 +224,16 @@ export const ExpenseTracker = () => {
                 <div className="balance">
                     <div className="balance-header">
                     <h3> Your Balance:</h3></div>
-                    {balance >= 0 ? <h2><u>${balance}</u><h4>You are doing great! Keep it up!</h4></h2> : <h2> -${balance * -1} <h4>You are spending more than you are saving!</h4></h2>}
+                    {updatedBalance >= 0 ? (<h2><u>${updatedBalance}</u><h4>You are doing great! Keep it up!</h4></h2>) : (<h2> -${Math.abs(updatedBalance)} <h4>You are spending more than you are saving!</h4></h2>)}
                 </div>
                 <div className="Summary">
                     <div className="Income">
                         <h4><u>Income</u></h4>
-                        <h3>${income}</h3>
+                        <h3>${updatedIncome}</h3>
                     </div>
                     <div className="Expenses">
                         <h4><u>Expenses</u></h4>
-                        <h3>${expenses}</h3>
+                        <h3>${updatedExpenses}</h3>
                     </div>
                 </div>
                 <form className="add-transaction" onSubmit={onSubmit}>

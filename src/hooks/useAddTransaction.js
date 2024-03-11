@@ -19,6 +19,7 @@ export const useAddTransaction = () => {
           transactionAmount: amountNumber,
           transactionType,
           category,
+          excludeFromBalance: transactionType === 'income' && budgetID !== "",
           createdAt: serverTimestamp(),
       });
         if (transactionType === 'income' && budgetID) {
