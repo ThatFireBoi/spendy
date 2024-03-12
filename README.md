@@ -2,13 +2,13 @@
 
 # Spendy
 
-Spendy is a budget analyzer that aims to make itself accessible to users of varying financial knowledge, bolstered by a receipt scanning OpenAI GPT and a reward system that incentives repeat use of the web app.
+Spendy is a budget analyzer that aims to make itself accessible to users of varying financial knowledge, bolstered by a chatbot powered by OpenAI and a reward system that incentives repeat use of the web app.
 
 This project was born out of me and my partner’s background in finance. We are currently employed by Banco Popular de Puerto Rico and it is thanks to them that we have partaken in the foundations program at Holberton Coding School. As a result of various meetings and talks, the budget analyzer idea was born due to an interest in bolstering this functionality inside Popular’s own MiBanco system. Due to time constraints, the project currently stands on its own, independent of the bank’s systems but serves as a template of what they would like to implement for their online services refresh.
 
 Regarding Spendy, we have so far implemented a database with Firebase, where the expenses and income for each user are saved, all behind log-in implementation using the user’s Google account. Currently, we are in the process of implementing the receipt scanner by way of a GPT and the API to provide a reward/achievement system. 
 
-Creating and implementing the GPT has been the most challenging, with the reward system in second place. An alternative we are looking at is Google’s OCR system, which can be implemented with Firebase instead of using the GPT, but this would cause us to loose the chatbot part of the implementation. But in the end, in regards to the MVP, we could go with the OCR as a temporary solution and later on work on implementing the OpenAI GPT. This project is also being built on React JS, which has brought it’s own challenges due to having elements of HTML without using actual HTML files, but instead implementing that functionality inside the javascript files themselves.
+Creating and implementing the GPT has been the most challenging, with the reward system in second place. We currently have a ChatBot powered by OpenAI and BotPress that can give you savings and budgeting tips. Regarding the receipt parser, an alternative we are looking at is Google’s OCR system, which can be implemented with Firebase instead of using the GPT, but this would cause us to loose the chatbot part of the implementation. But in the end, in regards to the MVP, we could go with the OCR as a temporary solution and later on work on implementing the OpenAI GPT. This project is also being built on React JS, which has brought it’s own challenges due to having elements of HTML without using actual HTML files, but instead implementing that functionality inside the javascript files themselves.
 
 # Developers
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
@@ -25,8 +25,10 @@ import { IconButton } from "@material-ui/core";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Doughnut } from "react-chartjs-2";
 import { ProgressBar } from "../budgets/ProgressBar";
+import { Chatbot } from "../scanner/Chatbot";
 import { isBudgetSetWithinFirstSevenDays} from "../budgets/BudgetList"
 import { BudgetCount } from "../budgets/BudgetList";
+
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
 
@@ -66,7 +68,7 @@ function downloadCSV(data) {
 export const ExpenseTracker = () => {
     const { addTransaction } = useAddTransaction();
     const { deleteTransaction } = useDeleteTransaction();
-    const { transactions, transactionTotals } = useGetTransactions();
+    const { transactions } = useGetTransactions();
     const { userName, profilePicture, userID } = useGetUserInfo();
     const budgets = useGetBudgets(userID);
     const [selectedBudgetID, setSelectedBudgetID] = useState("");
@@ -74,7 +76,24 @@ export const ExpenseTracker = () => {
     const [theme, setTheme] = useState("light");
     const expenseCategories = ['Food', 'Clothing', 'Entertainment', 'Home', 'Utilities', 'Other'];
     const [expenseCategory, setExpenseCategory] = useState(expenseCategories[0]);
-    
+    const transactionsRef = useRef(null);
+    const savingsRef = useRef(null);
+    const receiptsRef = useRef(null);
+    const achievementsRef = useRef(null);
+
+    let updatedBalance = 0;
+    let updatedIncome = 0;
+    let updatedExpenses = 0;
+
+    transactions.forEach(transaction => {
+        if (transaction.transactionType === 'income' && !transaction.excludeFromBalance) {
+            updatedIncome += parseFloat(transaction.transactionAmount);
+            updatedBalance += parseFloat(transaction.transactionAmount);
+        } else if (transaction.transactionType === 'expense') {
+            updatedExpenses += parseFloat(transaction.transactionAmount);
+            updatedBalance -= parseFloat(transaction.transactionAmount);
+        }
+    });
 
     useEffect(() => {
         const achievementDocRef = doc(db, "achievements", userID);
@@ -144,7 +163,6 @@ export const ExpenseTracker = () => {
     const [description, setDescription] = useState("");
     const [transactionAmount, setTransactionAmount] = useState(0);
     const [transactionType, setTransactionType] = useState("expense");
-    const { balance, income, expenses } = transactionTotals;
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -173,10 +191,20 @@ export const ExpenseTracker = () => {
         }
     };
 
+    const handleTransactionsClick = () => transactionsRef.current.scrollIntoView({ behavior: 'smooth' });
+    const handleSavingsClick = () => savingsRef.current.scrollIntoView({ behavior: 'smooth' });
+    const handleReceiptsClick = () => receiptsRef.current.scrollIntoView({ behavior: 'smooth' });
+    const handleAchievementsClick = () => achievementsRef.current.scrollIntoView({ behavior: 'smooth' });
+
     return (
         <>
         <div className="nav-bar">
-            <NavBar />
+            <NavBar
+                onTransactionsClick={handleTransactionsClick}
+                onSavingsClick={handleSavingsClick}
+                onReceiptsClick={handleReceiptsClick}
+                onAchievementsClick={handleAchievementsClick}
+            />
             <div className="theme-switch-wrapper">
                 <label htmlFor="theme-switch" className="theme-switch">
                     {theme === 'light' ? <FaSun color="#f39c12" size="1.5em" /> : <FaMoon color="white" size="1.5em" />}
@@ -193,8 +221,6 @@ export const ExpenseTracker = () => {
         </div>
         <div className={`expense-tracker-container ${theme}`}>
         <div className="expense-tracker">
-            <body><script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
-            <script src="https://mediafiles.botpress.cloud/60455ef1-33d9-4a61-b615-2cd02ecc452b/webchat/config.js" defer></script></body>
             <ToastContainer />
             <div className="container">
                 <DigitalClock />
@@ -203,16 +229,16 @@ export const ExpenseTracker = () => {
                 <div className="balance">
                     <div className="balance-header">
                     <h3> Your Balance:</h3></div>
-                    {balance >= 0 ? <h2><u>${balance}</u><h4>You are doing great! Keep it up!</h4></h2> : <h2> -${balance * -1} <h4>You are spending more than you are saving!</h4></h2>}
+                    {updatedBalance >= 0 ? (<h2><u>${updatedBalance}</u><h4>You are doing great! Keep it up!</h4></h2>) : (<h2> -${Math.abs(updatedBalance)} <h4>You are spending more than you are saving!</h4></h2>)}
                 </div>
                 <div className="Summary">
                     <div className="Income">
                         <h4><u>Income</u></h4>
-                        <h3>${income}</h3>
+                        <h3>${updatedIncome}</h3>
                     </div>
                     <div className="Expenses">
                         <h4><u>Expenses</u></h4>
-                        <h3>${expenses}</h3>
+                        <h3>${updatedExpenses}</h3>
                     </div>
                 </div>
                 <form className="add-transaction" onSubmit={onSubmit}>
@@ -249,7 +275,7 @@ export const ExpenseTracker = () => {
             </div>
             {/*{profilePicture && <div className="profile"> <img className="profile-picture" src={profilePicture} alt="" /> <button className="sign-out-btn" onClick={signUserOut}> Sign Out</button></div>}*/}
         </div>
-        <div className="transactions">
+        <div ref={transactionsRef} className="transactions">
         <h2> Transactions</h2>
         <ul>
             {transactions.map((transaction) => {
@@ -264,17 +290,16 @@ export const ExpenseTracker = () => {
             <Doughnut data={chartData} />
         </div>
         </div>
-        <div className="budget-section">
-            <h2>Manage your savings </h2>
-            <BudgetForm userID={userID} />
-            <BudgetList userID={userID} />
-        </div>
-        <div className="scanner-section">
+        <div ref={savingsRef} className="budget-section">
+                    <h2>Manage Your Savings</h2>
+                    <BudgetForm userID={userID} />
+                    <BudgetList userID={userID} />
+                </div>
+                <div ref={receiptsRef} className="scanner-section">
             <h2>Upload Receipts</h2>
             <Scanner userID={userID} />
         </div>
-        <div className="achievement-section"></div>
-        <div className="achievement-section">
+        <div ref={achievementsRef} className="achievement-section">
                         <h2>Achievements</h2>
                         <div>
                             <p>Submit 10 Transactions</p>
@@ -286,6 +311,7 @@ export const ExpenseTracker = () => {
                         </div>
                         <div>
                             <p>Set a Savings Goal</p>
+
                             <ProgressBar currentAmount={budgets.length ? 1 : 0} targetAmount={1} />
                         </div>
                         <div>
@@ -343,6 +369,9 @@ export const ExpenseTracker = () => {
                     </div>
                 }
                 </div>
+                    </div>
+                    <div className="chat-bot">
+                        <Chatbot />
                     </div>
         </div>
         </>

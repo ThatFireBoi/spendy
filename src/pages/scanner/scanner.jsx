@@ -58,7 +58,7 @@ export const Scanner = ({ userID }) => {
 
   return (
     <div className='receipt-list'>
-      <h1>Receipt List</h1>
+      <h2>Receipt Gallery</h2>
       <input type="file" onChange={(e) => setFileToUpload(e.target.files[0])} />
       <button onClick={uploadImage} disabled={!fileToUpload}>Upload Image</button>
 
