@@ -25,7 +25,8 @@ import { IconButton } from "@material-ui/core";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Doughnut } from "react-chartjs-2";
 import { ProgressBar } from "../budgets/ProgressBar";
-import { isBudgetSetWithinFirstFiveDays} from "../budgets/BudgetList"
+import { isBudgetSetWithinFirstSevenDays} from "../budgets/BudgetList"
+import { budgetCount, budgetSet } from "../budgets/BudgetList"
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
 
@@ -73,6 +74,7 @@ export const ExpenseTracker = () => {
     const [theme, setTheme] = useState("light");
     const expenseCategories = ['Food', 'Clothing', 'Entertainment', 'Home', 'Utilities', 'Other'];
     const [expenseCategory, setExpenseCategory] = useState(expenseCategories[0]);
+    
 
     useEffect(() => {
         const achievementDocRef = doc(db, "achievements", userID);
@@ -263,15 +265,15 @@ export const ExpenseTracker = () => {
         </div>
         </div>
         <div className="budget-section">
-                    <h2>Manage your savings </h2>
-                    <BudgetForm userID={userID} />
-                    <BudgetList userID={userID} />
-            
-                </div>
-                <div className="scanner-section">
+            <h2>Manage your savings </h2>
+            <BudgetForm userID={userID} />
+            <BudgetList userID={userID} />
+        </div>
+        <div className="scanner-section">
             <h2>Upload Receipts</h2>
             <Scanner userID={userID} />
         </div>
+        <div className="achievement-section"></div>
         <div className="achievement-section">
                         <h2>Achievements</h2>
                         <div>
@@ -279,13 +281,47 @@ export const ExpenseTracker = () => {
                             <ProgressBar currentAmount={transactions.length} targetAmount={10} />
                         </div>
                         <div>
-                            <p>Set a Budget</p>
+                            <p>Set a Savings Goal</p>
                             <ProgressBar currentAmount={budgets.length ? 1 : 0} targetAmount={1} />
                         </div>
                         <div>
-                            <p>Early Bird Budget</p>
-                            <ProgressBar currentAmount={isBudgetSetWithinFirstFiveDays(budgets) ? 1 : 0} targetAmount={1} />
+                            <p>Set a Budget the first 7 days of the month</p>
+                            <ProgressBar currentAmount={isBudgetSetWithinFirstSevenDays(budgets) ? 1 : 0} targetAmount={1} />
                         </div>
+                        <div>
+                            <p>Set 5 Goals</p>
+                            <ProgressBar currentAmount={budgets.length} targetAmount={5} />
+                        </div>
+                        <div>
+                            <p>Set 10 Goals</p>
+                            <ProgressBar currentAmount={budgets.length} targetAmount={10} />
+                        </div>
+                        <div>
+                            <p>Complete 3 Goals</p>
+                            <ProgressBar currentAmount={budgets.filter(budget => budget.completed).length} targetAmount={3} />
+                        </div>
+        <div className="completed-section">
+                        <h2>Completed</h2>
+                        {transactions.length >= 10 && 
+                    <div>
+                        <p>Submit 10 Transactions</p>
+                        <ProgressBar currentAmount={10} targetAmount={10} />
+                    </div>
+                }
+                    {budgets.length > 0 && 
+                    <div>
+                        <p>Set a Budget</p>
+                        <ProgressBar currentAmount={1} targetAmount={1} />
+                    </div>
+                }
+                {isBudgetSetWithinFirstSevenDays(budgets) && 
+                    <div>
+                        <p>Set a Budget the first 7 days of the month</p>
+                        <ProgressBar currentAmount={1} targetAmount={1} />
+                    </div>
+                }
+                
+                </div>
                     </div>
         </div>
         </>
