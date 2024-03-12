@@ -19,14 +19,19 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import "./styles.css";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Doughnut } from "react-chartjs-2";
 import { ProgressBar } from "../budgets/ProgressBar";
 import { Chatbot } from "../scanner/Chatbot";
+import { isBudgetSetWithinFirstSevenDays} from "../budgets/BudgetList"
+import { BudgetCount } from "../budgets/BudgetList";
+
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
+
 
 function convertToCSV(data) {
     if (!data || !data.length) {
@@ -301,9 +306,69 @@ export const ExpenseTracker = () => {
                             <ProgressBar currentAmount={transactions.length} targetAmount={10} />
                         </div>
                         <div>
-                            <p>Set a Saving's Goal</p>
+                            <p>Set a Budget the first 7 days of the month</p>
+                            <ProgressBar currentAmount={isBudgetSetWithinFirstSevenDays(budgets) ? 1 : 0} targetAmount={1} />
+                        </div>
+                        <div>
+                            <p>Set a Savings Goal</p>
+
                             <ProgressBar currentAmount={budgets.length ? 1 : 0} targetAmount={1} />
                         </div>
+                        <div>
+                            <p>Set 5 Goals</p>
+                            <ProgressBar currentAmount={budgets.length} targetAmount={5} />
+                        </div>
+                        <div>
+                            <p>Set 10 Goals</p>
+                            <ProgressBar currentAmount={budgets.length} targetAmount={10} />
+                        </div>
+                        <div>
+                            <p>Complete a Goal</p>
+                            <ProgressBar currentAmount={BudgetCount.length} targetAmount={1} />                        
+                            </div>
+                            <div>
+                            <p>Complete 5 Goals</p>
+                            <ProgressBar currentAmount={BudgetCount.length} targetAmount={5} />                        
+                            </div>
+        <div className="completed-section">
+                        <h2>Completed</h2>
+                        {transactions.length >= 10 && 
+                    <div>
+                        <p>Submit 10 Transactions</p>
+                        <ProgressBar currentAmount={10} targetAmount={10} />
+                    </div>
+                }
+                    {budgets.length > 0 && 
+                    <div>
+                        <p>Set a Savings Goal</p>
+                        <ProgressBar currentAmount={1} targetAmount={1} />
+                    </div>
+                }
+                {isBudgetSetWithinFirstSevenDays(budgets) && 
+                    <div>
+                        <p>Set a Budget the first 7 days of the month</p>
+                        <ProgressBar currentAmount={1} targetAmount={1} />
+                    </div>
+                }
+                {budgets.length >= 10 && 
+                <div>
+                <p>Set 10 Goals</p>
+                <ProgressBar currentAmount={10} targetAmount={10} />
+                </div>
+                }
+                {BudgetCount({ budgets }) >= 1 && 
+                <div>
+                    <p>Complete a Goal</p>
+                    <ProgressBar currentAmount={1} targetAmount={1} />
+                </div>
+                }
+                {BudgetCount({ budgets }) >= 5 && 
+                    <div>
+                    <p>Complete 5 Goals</p>
+                    <ProgressBar currentAmount={5} targetAmount={5} />
+                    </div>
+                }
+                </div>
                     </div>
                     <div className="chat-bot">
                         <Chatbot />

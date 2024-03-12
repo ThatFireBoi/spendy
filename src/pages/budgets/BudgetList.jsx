@@ -5,9 +5,30 @@ import { ProgressBar } from "./ProgressBar";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 
-export const BudgetList = ({ userID }) => {
+export function BudgetCount({ budgets }) {
+  if (!Array.isArray(budgets)) {
+    console.error("Budgets is not an array:", budgets);
+    return 0; // or any default value if budgets is not an array
+  }
+
+  const completedBudgets = budgets.filter((budget) => budget.completed);
+  return completedBudgets.length;
+}
+
+export function isBudgetSetWithinFirstSevenDays(budgets) {
+  const currentDate = new Date();
+  const currentDayOfMonth = currentDate.getDate();
+  return currentDayOfMonth <= 7 && budgets.length > 0;
+}
+
+export function hasAtLeastTenSavingsGoals(savingsGoalsCount) {
+  return savingsGoalsCount >= 10;
+}
+
+export const BudgetList = ({ userID, onBudgetSet }) => {
   const budgets = useGetBudgets(userID);
   const { deleteBudget } = useDeleteBudget();
+
 
   const handleDeleteBudget = async (budgetID) => {
       await deleteBudget(budgetID);
@@ -15,7 +36,7 @@ export const BudgetList = ({ userID }) => {
 
   return (
     <div className="budget-list">
-      <h2>Savings</h2>
+      <h2>Savings Goals</h2>
       {budgets.length > 0 ? (
         <ul>
           {budgets.map((budget) => (
