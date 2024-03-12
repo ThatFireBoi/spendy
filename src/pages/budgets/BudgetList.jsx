@@ -5,7 +5,15 @@ import { ProgressBar } from "./ProgressBar";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 
+export function BudgetCount({ budgets }) {
+  if (!Array.isArray(budgets)) {
+    console.error("Budgets is not an array:", budgets);
+    return 0; // or any default value if budgets is not an array
+  }
 
+  const completedBudgets = budgets.filter((budget) => budget.completed);
+  return completedBudgets.length;
+}
 
 export function isBudgetSetWithinFirstSevenDays(budgets) {
   const currentDate = new Date();
@@ -21,10 +29,10 @@ export const BudgetList = ({ userID, onBudgetSet }) => {
   const budgets = useGetBudgets(userID);
   const { deleteBudget } = useDeleteBudget();
 
+
   const handleDeleteBudget = async (budgetID) => {
       await deleteBudget(budgetID);
   };
-
 
   return (
     <div className="budget-list">

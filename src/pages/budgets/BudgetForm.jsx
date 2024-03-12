@@ -25,7 +25,6 @@ export const BudgetForm = () => {
     //Sets budget the to true once budget is added
     setBudgetSet(true);
 
-
     setName('');
     setTargetAmount('');
     setStartDate('');
