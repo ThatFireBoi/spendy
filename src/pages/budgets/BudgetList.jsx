@@ -7,10 +7,14 @@ import { IconButton } from "@material-ui/core";
 
 
 
-export function isBudgetSetWithinFirstFiveDays(budgets) {
+export function isBudgetSetWithinFirstSevenDays(budgets) {
   const currentDate = new Date();
   const currentDayOfMonth = currentDate.getDate();
   return currentDayOfMonth <= 7 && budgets.length > 0;
+}
+
+export function hasAtLeastTenSavingsGoals(savingsGoalsCount) {
+  return savingsGoalsCount >= 10;
 }
 
 export const BudgetList = ({ userID, onBudgetSet }) => {
@@ -21,7 +25,6 @@ export const BudgetList = ({ userID, onBudgetSet }) => {
       await deleteBudget(budgetID);
   };
 
-  const completedBudgets = budgets.filter(budget => budget.isCompleted);
 
   return (
     <div className="budget-list">
