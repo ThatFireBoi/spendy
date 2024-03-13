@@ -21,3 +21,5 @@ export const NavBar = ({ onTransactionsClick, onSavingsClick, onReceiptsClick, o
                 <li><EmojiEventsIcon /><button onClick={onAchievementsClick} className="nav-link">Achievements</button></li>
             </ul>
         </nav>
+    );
+}
