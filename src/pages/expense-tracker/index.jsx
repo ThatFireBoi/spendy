@@ -19,19 +19,16 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import "./styles.css";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-// import { BrowserRouter } from "react-router-dom";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Doughnut } from "react-chartjs-2";
 import { ProgressBar } from "../budgets/ProgressBar";
 import { Chatbot } from "../scanner/Chatbot";
-import { isBudgetSetWithinFirstSevenDays} from "../budgets/BudgetList"
+import { isBudgetSetWithinFirstSevenDays } from "../budgets/BudgetList";
 import { BudgetCount } from "../budgets/BudgetList";
-
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
-
 
 function convertToCSV(data) {
     if (!data || !data.length) {
@@ -291,7 +288,7 @@ export const ExpenseTracker = () => {
         </div>
         </div>
         <div ref={savingsRef} className="budget-section">
-                    <h2>Manage Your Savings</h2>
+        <h2>Manage Your Savings</h2>
                     <BudgetForm userID={userID} />
                     <BudgetList userID={userID} />
                 </div>
@@ -311,12 +308,11 @@ export const ExpenseTracker = () => {
                         </div>
                         <div>
                             <p>Set a Savings Goal</p>
-
                             <ProgressBar currentAmount={budgets.length ? 1 : 0} targetAmount={1} />
                         </div>
                         <div>
                             <p>Set 5 Goals</p>
-                            <ProgressBar currentAmount={budgets.length} targetAmount={5} />
+                            <ProgressBar currentAmount={budgets.length} targetAmount={4} />
                         </div>
                         <div>
                             <p>Set 10 Goals</p>
@@ -330,6 +326,7 @@ export const ExpenseTracker = () => {
                             <p>Complete 5 Goals</p>
                             <ProgressBar currentAmount={BudgetCount.length} targetAmount={5} />                        
                             </div>
+
         <div className="completed-section">
                         <h2>Completed</h2>
                         {transactions.length >= 10 && 
