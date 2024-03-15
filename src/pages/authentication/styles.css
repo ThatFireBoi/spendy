@@ -25,21 +25,12 @@
   background-size: cover;
   }  
 
-.navbar {
-  z-index: 1;
-  position: fixed;
-  background-color: #212f4a;
-  width: 100%;
-}
-
-.navbar section {
-}
 
 section {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 80vh;
   width: 100%;
 }
 
@@ -221,13 +212,16 @@ body {
 
 .inspiration {
   display: flex;
-  height: 100%;
   flex-direction: column;
+  align-items: center;
   background-color: #212f4a;
   border: 2px solid #212f4a;
   padding: 20px;
   border-radius: 20px;
   margin-bottom: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  height: 50%;
 }
 
 .inspiration h2 {
@@ -235,21 +229,42 @@ body {
   color: whitesmoke;
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  margin-bottom: 20px; /* Add margin to separate from paragraph */
+}
+
+.inspiration-content {
+  display: flex;
+  align-items: flex-start; /* Align items at the start of the cross axis */
 }
 
 .inspiration p {
   font-size: 1.0rem;
   color: whitesmoke;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  text-align: justify;
+  margin-right: 20px; /* Add margin to separate from images */
+}
+
+.mibancoImage,
+.chart {
+  border-radius: 20%;
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+}
+
+.features {
+  margin-bottom: 5px;
 }
 
 .features section {
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;;
+  background-size: cover;
+  text-align: center;
 }
 
 .features td {
@@ -269,12 +284,11 @@ body {
 
 
 .features th {
-  text-align: center; /* Align text to the center */
   color: white;
   font-family: "Quicksand", sans-serif;
   font-size: 3.0rem;
   padding: 15px;
-  text-shadow: 2px 2px 2px black;
+  text-align: center;
 }
 
 
@@ -309,12 +323,10 @@ body {
 }
 
 .about-us h2 {
-  box-shadow: ;
   text-align: center; /* Align text to the center */
   font-family: "Quicksand", sans-serif;
   font-size: 3.0rem;
   padding: 15px;
-  text-shadow: 2px 2px 2px;
   
 }
 
