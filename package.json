@@ -25,6 +25,7 @@
     "react-switch": "^7.0.0",
     "react-toastify": "^10.0.4",
     "recharts": "^2.11.0",
+    "vanilla-tilt": "^1.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
