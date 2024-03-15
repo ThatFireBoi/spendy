@@ -6,26 +6,26 @@ import "./styles.css";
 const Header = () => {
     return (
     <header className="header">
-        <p><span class="fancy">SPENDY</span></p>
-            <nav>
-                <ul>
-                    <li><a href="Inspiration">What inspires us</a></li>
-                    <li><a href="Features">Features</a></li>
-                    <li><a href="AboutUs">About us</a></li>
-                </ul>
-            </nav>
-        </header>
+        <nav>
+            <table>
+                <tr>
+                    <td><span className="fancy">SPENDY</span></td>
+                    <td><a href="#inspiration" className="btn">What inspires us</a></td>
+                    <td><a href="#features" className="btn">Features</a></td>
+                    <td><a href="#about-us" className="btn">About us</a></td>
+                </tr>
+            </table>
+        </nav>
+    </header>
     );
 };
 
 const Inspiration = () => {
     return (
-        <div>
-            <h2>What inspires us</h2>
+        <div className="inspiration" id="inspiration"> 
+            <h2><span class="fancy">What inspires us</span></h2>
             <p>
-                We believe that everyone should be able to track their expenses
-                and know where their money is going. We also believe that
-                everyone should be able to do that in a simple and easy way.
+            Our journey began as two employees of Banco Popular, selected for a unique opportunity at Holberton Coding School, fully sponsored to innovate in project-based learning. Inspired by Banco Popular's MiBanco app, we recognized its potential for enhancement. Our goal was clear: to reimagine MiBanco, making it as user friendly as possible but also injecting elements of gamification to incentivize user engagement. The result is a fusion of our banking expertise and coding skills, delivering a more intuitive and, rewarding experience for MiBanco users.
             </p>
         </div>
     );
@@ -33,24 +33,43 @@ const Inspiration = () => {
 
 const Features = () => {
     return (
-        <div className="features">
-            <h2>Features</h2>
-            <p>
-                Spendy is a simple and easy to use expense tracker that allows
-                you to track your expenses and know where your money is going.
-            </p>
+        <div className="features" id="features">
+            <th><span class="fancy">Features</span></th>
+            <table>
+                <tr>
+                    <td>
+                        <h3>Easy Tracking</h3>
+                        <p>Our app makes expense tracking effortless. With user-friendly interfaces and streamlined workflows, you can easily input, categorize, and analyze your expenses in just a few clicks. Say goodbye to complicated spreadsheets and clunky interfaces, and hello to simplicity and efficiency.</p>
+                    </td>
+                    <td>
+                        <h3>Intuitive Visuals</h3>
+                        <p>Experience your financial data in a whole new light with our intuitive visuals. Our app offers a single, sleek graph that displays your income and expenses by category, providing a clear overview of your financial landscape. With just a glance, you can see where your money is going and make informed and fast decisions about your spending.</p>
+                    </td>
+                    <td>
+                        <h3>Achievements</h3>
+                        <p>Stay motivated on your financial journey with our achievements feature. Track your progress as you achieve financial milestones, from sticking to your budget to increasing your savings. Our app celebrates your successes and encourages you to keep striving for financial stability and success. With achievable goals and meaningful rewards, you'll feel empowered to take control of your finances and achieve your financial dreams.</p>
+                    </td>
+                </tr>
+            </table>
         </div>
     );
 }
 
+
 const AboutUs = () => {
     return (
-        <div className="about-us">
-            <h2>About us</h2>
+        <div className="about-us" id="about-us">
+            <h2><span class="fancy">About us</span></h2>
             <p>
-                Spendy was created by a group of developers who wanted to make
-                tracking expenses simple and easy.
+            We're Natalia Rivera and Gabriel Castro, two aspiring developers excited to embark on this journey in the world of tech.
+            As newcomers to the realm of software development, we're eager to learn, grow, and make a positive impact through our work. With a passion for problem-solving and a commitment to continuous improvement, we're diving headfirst into the world of coding, ready to tackle any challenge that comes our way.
             </p>
+            <p>
+            we're always open to feedback, suggestions, and new connections. If you'd like to learn more about us or connect with us further, feel free to check out our GitHub and LinkedIn profiles:
+            </p>
+            <div>
+            <img src="/home/nataliagrivera/Holberton Group Projects/spendy/public/Gabriels_profesional_shots.jpeg"></img>
+            </div>
         </div>
     );
 }
@@ -76,30 +95,44 @@ export const Auth = () => {
     };
     return (
         <div className="landing-page">
+        <div>
             <Header />
-        <div className="user-login-page">
-            <h3 style={{ fontSize: "100px" }}>Welcome to Spendy your</h3>
-            <button className="login-with-google-account-btn" onClick={signInWithGoogle}> 
-                {" "}
-                Sign In
-            </button>
-            <div class="mouse"></div> 
+        </div>
+        <body>
+        <section>
+            <article>
+            <div className="user-login-page">
+                <h3 style={{ fontSize: "100px" }}>Welcome to <span class="fancy">Spendy</span>, your favorite expense tracker</h3>
+                <button className="login-with-google-account-btn" onClick={signInWithGoogle}> 
+                    {" "}
+                    Sign In
+                </button>
+                <div class="mouse"></div> 
+            </div>
+            </article>
+        </section>
+        <div>
+            <section>
+                <article className="inspiration">
+                <Inspiration />
+                </article>
+            </section>
         </div>
         <div>
-        <section>
-            <Inspiration />
-        </section>
+            <section>
+                <article>
+                <Features />
+                </article>
+            </section>
         </div>
         <div>
-        <section>
-            <Features />
-        </section>
+            <section>
+                <article>
+                <AboutUs />
+                </article>
+            </section>
         </div>
-        <div>
-        <section>
-            <AboutUs />
-        </section>
-        </div>
+        </body>
         </div>
     );
 };
