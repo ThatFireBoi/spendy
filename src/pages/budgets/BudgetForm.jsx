@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useAddBudget } from "../../hooks/useAddBudget";
 
-
 export const BudgetForm = () => {
   const { addBudget } = useAddBudget();
   const [name, setName] = useState('');
   const [targetAmount, setTargetAmount] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [budgetSet, setBudgetSet] = useState(false); //Check is budget has been set
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,8 +19,12 @@ export const BudgetForm = () => {
       startDate,
       endDate,
       userID,
+      completed: false,
     });
-    
+
+    //Sets budget the to true once budget is added
+    setBudgetSet(true);
+
     setName('');
     setTargetAmount('');
     setStartDate('');

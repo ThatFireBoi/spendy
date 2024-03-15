@@ -5,6 +5,7 @@ import SavingsIcon from '@mui/icons-material/Savings';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import "./NavBar.css";
+
 import logo from "./spendyLogo.png";
 //import { Link } from "react-router-dom";
 
@@ -21,4 +22,4 @@ export const NavBar = ({ onTransactionsClick, onSavingsClick, onReceiptsClick, o
             </ul>
         </nav>
     );
-};
+}
