@@ -1,7 +1,7 @@
 import { auth, provider } from "../../config/firebase-config";
 import { signInWithPopup } from "firebase/auth";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import React from "react";
 import headshot from "./Gabriel_proffesional.jpg";
 import headshot2 from "./Natalia_proffesional.jpeg";
 import mibancoImage from "./mibanco.jpg";

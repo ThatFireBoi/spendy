@@ -8,7 +8,7 @@ import { IconButton } from "@material-ui/core";
 export function BudgetCount({ budgets }) {
   if (!Array.isArray(budgets)) {
     console.error("Budgets is not an array:", budgets);
-    return 0; // or any default value if budgets is not an array
+    return 0;
   }
 
   const completedBudgets = budgets.filter((budget) => budget.completed);

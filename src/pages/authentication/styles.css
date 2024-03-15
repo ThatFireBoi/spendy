@@ -230,12 +230,12 @@ body {
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  margin-bottom: 20px; /* Add margin to separate from paragraph */
+  margin-bottom: 20px;
 }
 
 .inspiration-content {
   display: flex;
-  align-items: flex-start; /* Align items at the start of the cross axis */
+  align-items: flex-start;
 }
 
 .inspiration p {
@@ -244,7 +244,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   text-align: justify;
-  margin-right: 20px; /* Add margin to separate from images */
+  margin-right: 20px;
 }
 
 .mibancoImage,
@@ -323,7 +323,7 @@ body {
 }
 
 .about-us h2 {
-  text-align: center; /* Align text to the center */
+  text-align: center;
   font-family: "Quicksand", sans-serif;
   font-size: 3.0rem;
   padding: 15px;
