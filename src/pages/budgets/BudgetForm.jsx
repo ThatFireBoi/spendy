@@ -7,7 +7,7 @@ export const BudgetForm = () => {
   const [targetAmount, setTargetAmount] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [setBudgetSet] = useState(false); //Check is budget has been set
+  const [budgetSet, setBudgetSet] = useState(false); //Check is budget has been set
 
   const handleSubmit = async (e) => {
     e.preventDefault();

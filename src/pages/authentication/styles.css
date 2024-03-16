@@ -10,11 +10,13 @@
   color: white;
   text-shadow: -1px 2px 6px rgba(2, 48, 71, 0.54);
   background: rgb(0, 204, 255);
-  background: url('./sp.jpg') no-repeat;
+  background: url('./spendy.webp') no-repeat;
   background-attachment: fixed;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  margin: 0;
+  padding: 0;
   }
 
 .user-login-page
@@ -253,6 +255,30 @@ body {
   width: 200px;
   height: 200px;
   margin: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, .05);
+  border-radius: 10px;
+  border: 3px solid #6c5df3;
+}
+
+.mibancoImage:hover,
+.chart:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.Tracker,
+.Transactions,
+.Achievements {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, .05);
+  border-radius: 10px;
+  border: 3px solid #6c5df3;
+}
+
+.Tracker:hover,
+.Transactions:hover,
+.Achievements:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 
 .features {
@@ -391,6 +417,9 @@ body {
   vertical-align: middle;
   white-space: nowrap;
   word-wrap: break-word;
+  margin: 10px;
+  margin-right: 35px;
+  margin-left: 35px;
 }
 
 .button-git:hover {
@@ -452,6 +481,9 @@ body {
   user-select: none;
   -webkit-user-select: none;
   vertical-align: middle;
+  margin: 10px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .button-linkedin:hover,
@@ -469,4 +501,76 @@ body {
   cursor: not-allowed;
   background: rgba(0, 0, 0, .08);
   color: rgba(0, 0, 0, .3);
+}
+
+.twitter-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  margin: 20px;
+  background-color: #212f4a;
+  border-radius: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+  Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.button-twitter {
+  appearance: none;
+  background-color: #73b0ee;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+  margin: 10px;
+  margin-right: 220px;
+}
+
+.button-twitter:hover {
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.button-twitter:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.button-twitter:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.button-twitter:focus {
+  outline: 1px transparent;
+}
+
+.button-twitter:before {
+  display: none;
+}
+
+.button-twitter:-webkit-details-marker {
+  display: none;
 }

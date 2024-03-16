@@ -9,8 +9,8 @@ export const Chatbot = () => {
 
         script.onload = () => {
             window.botpressWebChat.init({
-            composerPlaceholder: 'Chat with Spendy AdviceBot!',
-            botConversationDescription: "Seek budgeting and savings advice from me!",
+            composerPlaceholder: 'Chat with Spendy TipsBot!',
+            botConversationDescription: "Budgeting and savings tips!",
             botId: '60455ef1-33d9-4a61-b615-2cd02ecc452b',
             hostUrl: 'https://cdn.botpress.cloud/webchat/v1',
             messagingUrl: 'https://messaging.botpress.cloud',
@@ -18,8 +18,8 @@ export const Chatbot = () => {
             webhookId: "9f35501c-8fd0-49f0-a9f5-4dfe06a09dee",
             lazySocket: true,
             themeName: "prism",
-            botName: "Spendy Advice",
-            avatarUrl: "https://i.imgur.com/ZMhynfi.png",
+            botName: "Spendy Tips",
+            avatarUrl: "https://ibb.co/xMZxLTK][img]https://i.ibb.co/xMZxLTK/chatbot.png",
             stylesheet: "https://webchat-styler-css.botpress.app/prod/6b482ef9-976c-49e5-8dab-087bb1cd57ec/v85465/style.css",
             frontendVersion: "v1",
             showBotInfoPage: true,
