@@ -98,6 +98,9 @@ const AboutUs = () => {
             <div className="twitter links">
                 <a href="https://twitter.com/Matute09" target="_blank" rel="noreferrer" className="button-twitter">Gabriel's Twitter</a>
             </div>
+            <div className="rep links">
+                <a href="https://github.com/ThatFireBoi/spendy" target="_blank" rel="noreferrer" className="button-repo">Spendy Repo</a>
+            </div>
         </div>
     );
 }; 
