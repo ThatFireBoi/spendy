@@ -318,14 +318,6 @@ export const ExpenseTracker = () => {
                             <p>Set 10 Goals</p>
                             <ProgressBar currentAmount={budgets.length} targetAmount={10} />
                         </div>
-                        <div>
-                            <p>Complete a Goal</p>
-                            <ProgressBar currentAmount={BudgetCount.length} targetAmount={1} />                        
-                            </div>
-                            <div>
-                            <p>Complete 5 Goals</p>
-                            <ProgressBar currentAmount={BudgetCount.length} targetAmount={5} />                        
-                            </div>
 
         <div className="completed-section">
                         <h2>Completed</h2>
