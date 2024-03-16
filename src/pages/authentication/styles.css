@@ -574,3 +574,40 @@ body {
 .button-twitter:-webkit-details-marker {
   display: none;
 }
+
+.navbar {
+  background-color: #04395c;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 2100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+li.navbar {
+  list-style-type: none;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}

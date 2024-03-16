@@ -12,10 +12,21 @@ import chart from "./chart-image.jpeg";
 // import { Link } from "react-router-dom";
 import "./styles.css";
 
+const NavBar = () => {
+    return (
+        <nav>
+            <ul>
+                <ul><a href="#inspiration">Inspiration</a></ul>
+                <ul><a href="#features">Features</a></ul>
+                <ul><a href="#about-us">About Us</a></ul>
+            </ul>
+        </nav>
+    );
+};
 
 const Inspiration = () => {
     return (
-      <div className="inspiration">
+      <div className="inspiration" id="inspiration">
         <h2><span className="fancy">What inspires us</span></h2>
         <div className="inspiration-content">
           <p>
@@ -122,6 +133,11 @@ export const Auth = () => {
             </div>
             </article>
         </section>
+        <section>
+                <article className="navbar">
+                <NavBar />
+                </article>
+            </section>
         <div>
             <section>
                 <article className="inspiration">
