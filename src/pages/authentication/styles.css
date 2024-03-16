@@ -34,6 +34,7 @@ section {
   justify-content: center;
   height: 80vh;
   width: 100%;
+  padding-bottom: 150px;
 }
 
 .user-login-page p {
@@ -272,6 +273,8 @@ body {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, .05);
   border-radius: 10px;
   border: 3px solid #6c5df3;
+  width: 350px;
+  height: 520px;
 }
 
 .Tracker:hover,
@@ -283,6 +286,8 @@ body {
 
 .features {
   margin-bottom: 5px;
+  padding-bottom: 150px;
+  padding-top: 150px;
 }
 
 .features section {
@@ -339,7 +344,8 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin: 20px;
   background-color: #212f4a;
   border-radius: 20px;
@@ -678,8 +684,37 @@ li.navbar {
   color: black;
 }
 
-@media screen and (max-width: 600px) {
-  .navbar a {
+@media screen and (max-width: 768px) {
+  .navbar a,
+  .about-us,
+  .about-us h2,
+  .about-us p,
+  .inspiration,
+  .inspiration h2,
+  .inspiration p,
+  .features,
+  .features th,
+  .features td,
+  .features h3,
+  .features p {
+    float: none;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .navbar a,
+  .about-us,
+  .about-us h2,
+  .about-us p,
+  .inspiration,
+  .inspiration h2,
+  .inspiration p,
+  .features,
+  .features th,
+  .features td,
+  .features h3,
+  .features p {
     float: none;
     display: block;
   }

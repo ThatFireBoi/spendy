@@ -150,14 +150,14 @@ export const Auth = () => {
         </div>
         <div>
             <section>
-                <article>
+                <article className="features">
                 <Features />
                 </article>
             </section>
         </div>
         <div>
             <section>
-                <article>
+                <article className="about-us">
                 <AboutUs />
                 </article>
             </section>
