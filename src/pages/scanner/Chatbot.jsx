@@ -19,7 +19,7 @@ export const Chatbot = () => {
             lazySocket: true,
             themeName: "prism",
             botName: "Spendy Tips",
-            avatarUrl: "https://ibb.co/xMZxLTK][img]https://i.ibb.co/xMZxLTK/chatbot.png",
+            avatarUrl: "https://i.imgur.com/ZMhynfi.png",
             stylesheet: "https://webchat-styler-css.botpress.app/prod/6b482ef9-976c-49e5-8dab-087bb1cd57ec/v85465/style.css",
             frontendVersion: "v1",
             showBotInfoPage: true,
