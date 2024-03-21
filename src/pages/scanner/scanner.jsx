@@ -9,25 +9,30 @@ import "./scanner.css";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 
+// Scanner component definition
 export const Scanner = ({ userID }) => {
   const [receipts, triggerRefetch] = useFetchReceipts(userID);
   const [selectedImageUrl, setSelectedImageUrl] = useState('');
   const [fileToUpload, setFileToUpload] = useState(null);
 
+  // Styles for thumbnail images
   const thumbnailStyle = {
     maxWidth: '150px',
     maxHeight: '150px',
     cursor: 'pointer'
   };
 
+  // Function to upload the selected image to Firebase storage and save its URL
   const uploadImage = async () => {
     if (!fileToUpload) return;
 
+    // Create a reference to the file in Firebase storage
     const storageRef = ref(storage, `receipts/${fileToUpload.name}`);
     await uploadBytes(storageRef, fileToUpload);
 
     const downloadUrl = await getDownloadURL(storageRef);
 
+    // Add the image URL to the database
     const receiptsCollectionRef = collection(db, 'receipts');
     await addDoc(receiptsCollectionRef, {
       userID: userID,
@@ -36,7 +41,7 @@ export const Scanner = ({ userID }) => {
     });
 
     setFileToUpload(null);
-    triggerRefetch();
+    triggerRefetch(); // Fetch the updated list of receipts
   };
 
   // Delete the image from the database, storage, and local storage
@@ -53,7 +58,7 @@ export const Scanner = ({ userID }) => {
     triggerRefetch();
   };
 
-  // Close the overlay when the uiser clicks outside of the image
+  // Close the overlay when the user clicks outside of the image
   const closeOverlay = () => setSelectedImageUrl('');
 
   return (
