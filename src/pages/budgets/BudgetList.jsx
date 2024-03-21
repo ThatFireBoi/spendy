@@ -5,12 +5,14 @@ import { ProgressBar } from "./ProgressBar";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 
+// Counts the number of completed budgets
 export function BudgetCount({ budgets }) {
   if (!Array.isArray(budgets)) {
     console.error("Budgets is not an array:", budgets);
     return 0;
   }
 
+  // Filter the budgets array to only include completed budgets
   const completedBudgets = budgets.filter((budget) => budget.completed);
   return completedBudgets.length;
 }
@@ -25,6 +27,7 @@ export function hasAtLeastTenSavingsGoals(savingsGoalsCount) {
   return savingsGoalsCount >= 10;
 }
 
+// Component to list all budgets
 export const BudgetList = ({ userID, onBudgetSet }) => {
   const budgets = useGetBudgets(userID);
   const { deleteBudget } = useDeleteBudget();
@@ -33,7 +36,7 @@ export const BudgetList = ({ userID, onBudgetSet }) => {
   const handleDeleteBudget = async (budgetID) => {
       await deleteBudget(budgetID);
   };
-
+// Render the list of budgets or a message if no budgets are found
   return (
     <div className="budget-list">
       <h2>Savings Goals</h2>
