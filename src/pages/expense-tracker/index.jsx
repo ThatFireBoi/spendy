@@ -30,6 +30,7 @@ import { BudgetCount } from "../budgets/BudgetList";
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
 
+// Function to convert transaction data to CSV format
 function convertToCSV(data) {
     if (!data || !data.length) {
         return '';
@@ -61,7 +62,7 @@ function downloadCSV(data) {
     a.click();
     document.body.removeChild(a);
 }
-
+// Main ExpenseTracker component
 export const ExpenseTracker = () => {
     const { addTransaction } = useAddTransaction();
     const { deleteTransaction } = useDeleteTransaction();
@@ -82,6 +83,7 @@ export const ExpenseTracker = () => {
     let updatedIncome = 0;
     let updatedExpenses = 0;
 
+    // Calculate the updated balances
     transactions.forEach(transaction => {
         if (transaction.transactionType === 'income' && !transaction.excludeFromBalance) {
             updatedIncome += parseFloat(transaction.transactionAmount);
@@ -92,6 +94,7 @@ export const ExpenseTracker = () => {
         }
     });
 
+    // Effect hook to check achievements based on transactions and budgets
     useEffect(() => {
         const achievementDocRef = doc(db, "achievements", userID);
 
@@ -144,7 +147,7 @@ export const ExpenseTracker = () => {
             aggregatedData[category] += parseFloat(transaction.transactionAmount);
 });
 
-
+// Chart data configuration
     const chartData = {
         labels: Object.keys(aggregatedData),
         datasets: [{
@@ -161,6 +164,7 @@ export const ExpenseTracker = () => {
     const [transactionAmount, setTransactionAmount] = useState(0);
     const [transactionType, setTransactionType] = useState("expense");
 
+    // Function to handle form submission
     const onSubmit = async (e) => {
         e.preventDefault()
         addTransaction({
@@ -193,6 +197,7 @@ export const ExpenseTracker = () => {
     const handleReceiptsClick = () => receiptsRef.current.scrollIntoView({ behavior: 'smooth' });
     const handleAchievementsClick = () => achievementsRef.current.scrollIntoView({ behavior: 'smooth' });
 
+    // Render
     return (
         <>
         <div className="nav-bar">
